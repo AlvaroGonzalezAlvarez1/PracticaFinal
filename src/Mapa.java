@@ -14,6 +14,31 @@ public class Mapa {
         crearGrafo();
     }
 
+    public Habitacion getHabitacion(int index) {
+        Habitacion resultado=null;
+        if (index >= 0 && index < habitaciones.length) {
+            resultado = habitaciones[index];
+        }
+        return resultado;
+    }
+
+    public EdgeGraph<Integer, Puerta> getConexion(int habitacion, int x, int y) {
+        IndexedList<EdgeGraph<Integer,Puerta>>edges=grafo.edgesFrom(habitacion);
+        int i=0;
+        EdgeGraph<Integer,Puerta>resultado=null;
+        boolean encontrado=false;
+        while (i<edges.len() && encontrado==false) {
+            EdgeGraph<Integer,Puerta>edge=edges.get(i);
+            Puerta p=edge.getData();
+            if (p.getXOrigen()==x && p.getYOrigen()==y) {
+                resultado=edge;
+                encontrado=true;
+            }
+            i++;
+        }
+        return resultado;
+    }
+
     private void crearHabitaciones(){
         habitaciones[0] = new Habitacion(new Celda[][]{
                 {p(), p(), p(), p(), p()},
@@ -76,64 +101,6 @@ public class Mapa {
         //Habitacion contigua a 1 independiente del ciclo
         grafo.addEdge(1, 3,new Puerta(5,6,0,3));
         grafo.addEdge(3,1,new Puerta(0,3,5,6));
-    }
-
-    public Habitacion getHabitacion(int index) {
-        Habitacion resultado=null;
-        if (index >= 0 && index < habitaciones.length) {
-            resultado = habitaciones[index];
-        }
-        return resultado;
-    }
-
-    public int getNumeroHabitaciones() {
-        return habitaciones.length;
-    }
-
-    public int getIndiceHabitacion(Habitacion h) {
-        int resultado=-1;
-        for (int i=0;i<habitaciones.length;i++) {
-            if (habitaciones[i]==h) {
-                resultado=i;
-            }
-        }
-
-        return resultado;
-    }
-
-    public Puerta getPuerta(int habitacion, int x, int y) {
-        Puerta resultado=null;
-        IndexedList<EdgeGraph<Integer,Puerta>>edges=grafo.edgesFrom(habitacion);
-        int i=0;
-        boolean encontrado=false;
-        while (i<edges.len() && encontrado==false) {
-            EdgeGraph<Integer,Puerta> edge=edges.get(i);
-            Puerta p = edge.getData();
-            if (p.getXOrigen()==x && p.getYOrigen()==y) {
-                resultado = p;
-                encontrado = true;
-            }
-
-            i++;
-        }
-        return resultado;
-    }
-
-    public int getDestinoDesdePuerta(int habitacion, int x, int y) {
-        int resultado=-1;
-        IndexedList<EdgeGraph<Integer,Puerta>> edges=grafo.edgesFrom(habitacion);
-        int i=0;
-        boolean encontrado=false;
-        while (i<edges.len() && encontrado==false) {
-            EdgeGraph<Integer,Puerta> edge=edges.get(i);
-            Puerta p=edge.getData();
-            if (p.getXOrigen()==x && p.getYOrigen()==y) {
-                resultado=edge.getEnd().getData();
-                encontrado=true;
-            }
-            i++;
-        }
-        return resultado;
     }
 
     private Celda p() {

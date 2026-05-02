@@ -1,3 +1,5 @@
+import Estructuras.EdgeGraph;
+
 public class Jugador {
 
     private int x;
@@ -10,30 +12,20 @@ public class Jugador {
         this.habitacionActual=habitacionInicial;
     }
 
-    public void mover(int dx, int dy,Mapa mapa) {
+    public void mover(int dx, int dy, Mapa mapa) {
+        Habitacion h=mapa.getHabitacion(habitacionActual);
         int nx=x+dx;
         int ny=y+dy;
-        boolean accesible=false;
-        Habitacion h=mapa.getHabitacion(habitacionActual);
-        if (h.esTransitable(nx, ny)) {
-            accesible=true;
-        }
-        if(accesible==true){
+        boolean accesible=h.esTransitable(nx, ny);
+        if(accesible==true) {
             x=nx;
             y=ny;
-            Celda celda=h.getCelda(x,y);
-            Tipo tipo=celda.getTipo();
-            if(tipo==Tipo.PUERTA){
-                int actual=habitacionActual;
-                Puerta p = mapa.getPuerta(habitacionActual, x, y);
-
-                if (p != null) {
-                    int destino = mapa.getDestinoDesdePuerta(habitacionActual, x, y);
-
-                    habitacionActual = destino;
-                    x = p.getXDestino();
-                    y = p.getYDestino();
-                }
+            EdgeGraph<Integer,Puerta>edge=mapa.getConexion(habitacionActual, x, y);
+            if (edge!=null) {
+                Puerta p=edge.getData();
+                habitacionActual=edge.getEnd().getData();
+                x=p.getXDestino();
+                y=p.getYDestino();
             }
         }
     }
