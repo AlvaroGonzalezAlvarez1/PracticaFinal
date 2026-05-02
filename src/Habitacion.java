@@ -7,8 +7,8 @@ public class Habitacion {
 
     public Celda getCelda(int x, int y) {
         Celda resultado;
-        if(dentro(x, y)==true){
-            resultado=celdas[y][x];
+        if (dentro(x, y)) {
+            resultado = celdas[y][x];
         }
         else {
             resultado=new Celda(Tipo.VACIO);
@@ -21,7 +21,14 @@ public class Habitacion {
     }
 
     public boolean esTransitable(int x, int y) {
-        return dentro(x, y) && celdas[y][x].esTransitable();
+        boolean resultado = false;
+        if (dentro(x,y)) {
+            Tipo tipo=celdas[y][x].getTipo();
+            if (tipo==Tipo.SUELO || tipo==Tipo.PUERTA) {
+                resultado=true;
+            }
+        }
+        return resultado;
     }
 
     public Celda[][] getCeldas() {

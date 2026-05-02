@@ -6,7 +6,7 @@ public class Game {
 
     public Game(Input input) {
         this.mapa=new Mapa();
-        this.jugador=new Jugador(2, 2, mapa.getHabitacion(0));
+        this.jugador=new Jugador(2, 2,0);
         this.input=input;
     }
 
@@ -23,19 +23,19 @@ public class Game {
         if (accion!=null) {
             switch (accion) {
                 case "w"->{
-                    jugador.mover(0, -1);
+                    jugador.mover(0, -1,mapa);
                     procesado = true;
                 }
                 case "s"->{
-                    jugador.mover(0, 1);
+                    jugador.mover(0, 1,mapa);
                     procesado = true;
                 }
                 case "a"->{
-                    jugador.mover(-1, 0);
+                    jugador.mover(-1, 0,mapa);
                     procesado = true;
                 }
                 case "d"->{
-                    jugador.mover(1, 0);
+                    jugador.mover(1, 0,mapa);
                     procesado = true;
                 }
                 default->{
@@ -49,7 +49,7 @@ public class Game {
     }
 
     private void render() {
-        Habitacion h=jugador.getHabitacionActual();
+        Habitacion h=mapa.getHabitacion(jugador.getHabitacionActual());
         Celda[][] m=h.getCeldas();
         for (int y=0;y<m.length; y++) {
             for (int x=0; x < m[0].length; x++) {
@@ -64,6 +64,9 @@ public class Game {
                     else if(tipo==Tipo.SUELO) {
                         System.out.print(". ");
                     }
+                    else if(tipo==Tipo.PUERTA){
+                        System.out.print("D ");
+                    }
                     else{
                         System.out.print("  ");
                     }
@@ -71,7 +74,9 @@ public class Game {
             }
             System.out.println();
         }
-
+        System.out.println();
+        System.out.println("Habitacion: " + jugador.getHabitacionActual());
+        System.out.println("Pos: " + jugador.getX() + "," + jugador.getY());
         System.out.println();
     }
 }

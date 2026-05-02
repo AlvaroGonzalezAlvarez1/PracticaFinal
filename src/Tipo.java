@@ -1,5 +1,6 @@
 public enum Tipo {
-    SUELO,
-    PARED,
-    VACIO
+    SUELO,  //s,.
+    PARED,  //p,#
+    VACIO,  //v,no se imrime
+    PUERTA  //d,D
 }
