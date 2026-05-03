@@ -30,13 +30,6 @@ public class Jugador {
         }
     }
 
-    //Implementar con el grafo mas tarde
-    public void cambiarHabitacion(int nuevaHabitacion, int nuevoX, int nuevoY) {
-        this.habitacionActual=nuevaHabitacion;
-        this.x = nuevoX;
-        this.y = nuevoY;
-    }
-
     public int getHabitacionActual() {
         return habitacionActual;
     }
