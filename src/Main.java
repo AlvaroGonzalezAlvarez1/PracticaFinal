@@ -1,3 +1,6 @@
+import Pruebas.Juego.Game;
+import Pruebas.Juego.Input;
+
 public class Main {
 
     public static void main(String[] args) {

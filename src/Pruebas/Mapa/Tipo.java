@@ -1,3 +1,5 @@
+package Pruebas.Mapa;
+
 public enum Tipo {
     SUELO,  //s,.
     PARED,  //p,#

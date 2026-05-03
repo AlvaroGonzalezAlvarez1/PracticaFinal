@@ -1,3 +1,5 @@
+package Pruebas.Mapa;
+
 public class Puerta {
     private int xOrigen;
     private int yOrigen;

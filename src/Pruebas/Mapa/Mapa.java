@@ -1,10 +1,12 @@
+package Pruebas.Mapa;
+
 import Estructuras.EdgeGraph;
 import Estructuras.Graph;
 import Estructuras.IndexedList;
 
 public class Mapa {
     private Habitacion[] habitaciones;
-    private Graph<Integer,Puerta> grafo;
+    private Graph<Integer, Puerta> grafo;
 
     public Mapa(){
         habitaciones=new Habitacion[4];
@@ -23,12 +25,12 @@ public class Mapa {
     }
 
     public EdgeGraph<Integer, Puerta> getConexion(int habitacion, int x, int y) {
-        IndexedList<EdgeGraph<Integer,Puerta>>edges=grafo.edgesFrom(habitacion);
+        IndexedList<EdgeGraph<Integer, Puerta>>edges=grafo.edgesFrom(habitacion);
         int i=0;
-        EdgeGraph<Integer,Puerta>resultado=null;
+        EdgeGraph<Integer, Puerta>resultado=null;
         boolean encontrado=false;
         while (i<edges.len() && encontrado==false) {
-            EdgeGraph<Integer,Puerta>edge=edges.get(i);
+            EdgeGraph<Integer, Puerta>edge=edges.get(i);
             Puerta p=edge.getData();
             if (p.getXOrigen()==x && p.getYOrigen()==y) {
                 resultado=edge;

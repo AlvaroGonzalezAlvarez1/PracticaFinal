@@ -1,3 +1,5 @@
+package Pruebas.Juego;
+
 import Estructuras.Queue;
 
 public class Input {

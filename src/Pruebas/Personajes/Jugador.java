@@ -1,4 +1,9 @@
+package Pruebas.Personajes;
+
 import Estructuras.EdgeGraph;
+import Pruebas.Mapa.Habitacion;
+import Pruebas.Mapa.Mapa;
+import Pruebas.Mapa.Puerta;
 
 public class Jugador {
 
@@ -20,7 +25,7 @@ public class Jugador {
         if(accesible==true) {
             x=nx;
             y=ny;
-            EdgeGraph<Integer,Puerta>edge=mapa.getConexion(habitacionActual, x, y);
+            EdgeGraph<Integer, Puerta>edge=mapa.getConexion(habitacionActual, x, y);
             if (edge!=null) {
                 Puerta p=edge.getData();
                 habitacionActual=edge.getEnd().getData();

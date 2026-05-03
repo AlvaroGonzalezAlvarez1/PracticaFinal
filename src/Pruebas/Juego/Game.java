@@ -1,3 +1,11 @@
+package Pruebas.Juego;
+
+import Pruebas.Mapa.Celda;
+import Pruebas.Mapa.Habitacion;
+import Pruebas.Mapa.Mapa;
+import Pruebas.Mapa.Tipo;
+import Pruebas.Personajes.Jugador;
+
 public class Game {
 
     private Mapa mapa;
@@ -58,13 +66,13 @@ public class Game {
                 }
                 else {
                     Tipo tipo=m[y][x].getTipo();
-                    if(tipo==Tipo.PARED) {
+                    if(tipo== Tipo.PARED) {
                         System.out.print("# ");
                     }
-                    else if(tipo==Tipo.SUELO) {
+                    else if(tipo== Tipo.SUELO) {
                         System.out.print(". ");
                     }
-                    else if(tipo==Tipo.PUERTA){
+                    else if(tipo== Tipo.PUERTA){
                         System.out.print("D ");
                     }
                     else{

@@ -1,3 +1,5 @@
+package Pruebas.Mapa;
+
 public class Celda {
     private Tipo tipo;
 
@@ -15,7 +17,7 @@ public class Celda {
 
     public boolean esTransitable(){
         boolean result=false;
-        if(tipo==Tipo.SUELO){
+        if(tipo== Tipo.SUELO){
             result=true;
         }
         return result;
