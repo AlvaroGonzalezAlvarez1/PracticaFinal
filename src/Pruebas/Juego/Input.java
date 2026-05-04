@@ -2,23 +2,23 @@ package Pruebas.Juego;
 
 import Estructuras.Queue;
 
+import java.util.Scanner;
+
 public class Input {
 
-    private Queue<String> acciones;
+    private Scanner scanner;
 
     public Input() {
-        acciones=new Queue<>();
-    }
-
-    public void addAccion(String accion) {
-        acciones.enqueue(accion);
+        scanner=new Scanner(System.in);
     }
 
     public String getAccion() {
-        return acciones.dequeue();
+        System.out.print("Accion (w/a/s/d): ");
+        String accion=scanner.nextLine();
+        return accion;
     }
 
     public boolean hayAcciones() {
-        return !acciones.isEmpty();
+        return true;
     }
 }

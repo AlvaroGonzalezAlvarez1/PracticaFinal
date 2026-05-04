@@ -17,7 +17,7 @@ public class Celda {
 
     public boolean esTransitable(){
         boolean result=false;
-        if(tipo== Tipo.SUELO){
+        if(tipo==Tipo.SUELO || tipo==Tipo.PUERTA){
             result=true;
         }
         return result;

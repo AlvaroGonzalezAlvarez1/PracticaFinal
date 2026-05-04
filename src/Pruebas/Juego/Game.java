@@ -19,10 +19,17 @@ public class Game {
     }
 
     public void run() {
-        while (input.hayAcciones()==true) {
+        boolean jugando=true;
+        render();
+        while (jugando==true){
             String accion=input.getAccion();
-            procesarTurno(accion);
-            render();
+            if(accion.equals("q")) {
+                jugando=false;
+            }
+            else{
+                procesarTurno(accion);
+                render();
+            }
         }
     }
 
