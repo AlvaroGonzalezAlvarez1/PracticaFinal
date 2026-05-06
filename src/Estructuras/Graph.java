@@ -113,11 +113,10 @@ public class Graph<DN,DA>{
             addNode(destination);
             endNode = getNode(destination);
         }
-        // Evitar duplicados
-        if(existsEdge(origin, destination) == false){
-            EdgeGraph<DN,DA> newEdge = new EdgeGraph<>(startNode, endNode, data);
-            edges.append(newEdge);
-        }
+        //Método modificado para poder añadir varias puertas entre las mismas habitaciones
+        EdgeGraph<DN,DA> newEdge = new EdgeGraph<>(startNode, endNode, data);
+        edges.append(newEdge);
+
     }
 
     public void addUndirectedEdge(DN origin, DN destination, DA data) {

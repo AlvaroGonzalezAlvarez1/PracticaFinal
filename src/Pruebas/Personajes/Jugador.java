@@ -1,9 +1,7 @@
 package Pruebas.Personajes;
 
 import Estructuras.EdgeGraph;
-import Pruebas.Mapa.Habitacion;
-import Pruebas.Mapa.Mapa;
-import Pruebas.Mapa.Puerta;
+import Pruebas.Mapa.*;
 
 public class Jugador {
 
@@ -21,16 +19,18 @@ public class Jugador {
         Habitacion h=mapa.getHabitacion(habitacionActual);
         int nx=x+dx;
         int ny=y+dy;
-        boolean accesible=h.esTransitable(nx, ny);
-        if(accesible==true) {
+        if(h.esTransitable(nx,ny)==true) {
             x=nx;
             y=ny;
-            EdgeGraph<Integer, Puerta>edge=mapa.getConexion(habitacionActual, x, y);
-            if (edge!=null) {
-                Puerta p=edge.getData();
-                habitacionActual=edge.getEnd().getData();
-                x=p.getXDestino();
-                y=p.getYDestino();
+            Celda celda=h.getCeldas()[ny][nx];
+            if (celda.getTipo()==Tipo.PUERTA) {
+                EdgeGraph<Integer,Puerta>edge=mapa.getConexion(habitacionActual,nx,ny);
+                if (edge!=null){
+                    Puerta p=edge.getData();
+                    habitacionActual=edge.getEnd().getData();
+                    x=p.getXDestino();
+                    y=p.getYDestino();
+                }
             }
         }
     }
