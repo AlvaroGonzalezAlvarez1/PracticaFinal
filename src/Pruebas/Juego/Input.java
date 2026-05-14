@@ -1,7 +1,5 @@
 package Pruebas.Juego;
 
-import Estructuras.Queue;
-
 import java.util.Scanner;
 
 public class Input {
@@ -22,3 +20,5 @@ public class Input {
         return true;
     }
 }
+
+//Solo para Juego por consola, para juegoFX no es necesario

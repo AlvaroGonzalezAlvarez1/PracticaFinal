@@ -1,6 +1,5 @@
 package Pruebas.Personajes;
 
-import Estructuras.EdgeGraph;
 import Pruebas.Mapa.*;
 
 public class Jugador {
@@ -24,10 +23,9 @@ public class Jugador {
             y=ny;
             Celda celda=h.getCeldas()[ny][nx];
             if (celda.getTipo()==Tipo.PUERTA) {
-                EdgeGraph<Integer,Puerta>edge=mapa.getConexion(habitacionActual,nx,ny);
-                if (edge!=null){
-                    Puerta p=edge.getData();
-                    habitacionActual=edge.getEnd().getData();
+                Puerta p=mapa.getPuerta(habitacionActual,nx,ny);
+                if (p!=null){
+                    habitacionActual=p.getHabitacionDestino();
                     x=p.getXDestino();
                     y=p.getYDestino();
                 }

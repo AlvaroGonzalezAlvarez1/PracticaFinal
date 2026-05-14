@@ -95,3 +95,5 @@ public class Game {
         System.out.println();
     }
 }
+
+//Solo para Juego por consola, para juegoFX no es necesario
