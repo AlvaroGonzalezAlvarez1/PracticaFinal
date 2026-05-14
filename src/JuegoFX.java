@@ -14,11 +14,11 @@ public class JuegoFX extends Application {
     private Pane root;
     private Mapa mapa;
     private Jugador jugador;
-    private Image paredImg;
-    private Image sueloImg;
     private Image puertaImg;
     private Image jugadorImg;
     private ImageView jugadorView;
+    private Image[] paredes;
+    private Image[] suelo;
 
 
     private int TILE = 32; //cantidad de bits por celdas (da lo mismo, cambiar en un futuro)
@@ -30,9 +30,17 @@ public class JuegoFX extends Application {
         jugador=new Jugador(2,2,0);
 
         //Carga texturas
-        paredImg=new Image("file:./src/sprites/pared.png");
-        sueloImg = new Image("file:./src/sprites/suelo.png");
-        puertaImg = new Image("file:./src/sprites/puerta.png");
+        paredes=new Image[3];
+        for (int i=0;i<paredes.length;i++) {
+            paredes[i]=new Image("file:./src/sprites/pared_"+i+".png");
+        }
+
+        suelo=new Image[1];
+        for (int i=0;i<suelo.length;i++) {
+            suelo[i]=new Image("file:./src/sprites/suelo_"+i+".png");
+        }
+
+        puertaImg=new Image("file:./src/sprites/puerta.png");
 
         jugadorImg=new Image("file:./src/sprites/jugador.png");
         jugadorView=new ImageView(jugadorImg);
@@ -70,8 +78,8 @@ public class JuegoFX extends Application {
                 tile.setX(x*TILE);
                 tile.setY(y*TILE);
                 switch (h.getCeldas()[y][x].getTipo()) {
-                    case PARED->tile.setImage(paredImg);
-                    case SUELO->tile.setImage(sueloImg);
+                    case PARED->tile.setImage(paredes[h.getCeldas()[y][x].getSpriteId()]);
+                    case SUELO->tile.setImage(suelo[h.getCeldas()[y][x].getSpriteId()]);
                     case PUERTA->tile.setImage(puertaImg);
                     case VACIO->{
                         continue;

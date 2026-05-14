@@ -77,12 +77,12 @@ public class Mapa {
         });
 
         habitaciones[3] = new Habitacion(new Celda[][]{
-                {p(), p(), p(), p(), p(), p(), p()},
-                {p(), s(), s(), s(), s(), s(), p()},
+                {p(), p(), p(1), p(), p(1), p(), p()},
+                {p(), s(), s(), s(), s(), s(), p(1)},
                 {p(), s(), p(), s(), p(), s(), p()},
-                {d(), s(), s(), s(), s(), s(), p()},
+                {d(), s(), s(), s(), s(), s(), p(1)},
                 {p(), s(), p(), s(), p(), s(), p()},
-                {p(), s(), s(), s(), s(), s(), p()},
+                {p(), s(), s(), s(), s(), s(), p(1)},
                 {p(), p(), p(), p(), p(), p(), p()}
         });
     }
@@ -114,11 +114,14 @@ public class Mapa {
     }
 
     private Celda p() {
-        return new Celda(Tipo.PARED);
+        return new Celda(Tipo.PARED,0);
+    }   //Para no añadir 0 a todas las p()
+    private Celda p(int n) {
+        return new Celda(Tipo.PARED,n);
     }
 
     private Celda s() {
-        return new Celda(Tipo.SUELO);
+        return new Celda(Tipo.SUELO,0);
     }
 
     private Celda v() {

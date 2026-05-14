@@ -73,7 +73,7 @@ public class Game {
                 }
                 else {
                     Tipo tipo=m[y][x].getTipo();
-                    if(tipo== Tipo.PARED) {
+                    if(tipo==Tipo.PARED) {
                         System.out.print("# ");
                     }
                     else if(tipo== Tipo.SUELO) {
@@ -81,6 +81,9 @@ public class Game {
                     }
                     else if(tipo== Tipo.PUERTA){
                         System.out.print("D ");
+                    }
+                    else if(tipo==Tipo.OBJETO) {
+                        System.out.print("O ");
                     }
                     else{
                         System.out.print("  ");
