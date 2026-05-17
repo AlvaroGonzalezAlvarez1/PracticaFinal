@@ -9,7 +9,7 @@ public class Habitacion {
 
 
     private boolean dentro(int x, int y){
-        return y>=0 && y<celdas.length && x>=0 && x<celdas[0].length;
+        return y>=0 && y<celdas.length && x>=0 && x<celdas[y].length;
     }
 
     public boolean esTransitable(int x,int y) {
@@ -24,4 +24,5 @@ public class Habitacion {
         return celdas;
     }
 }
+
 

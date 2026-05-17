@@ -1,0 +1,19 @@
+Cosas a futuro
+ Usar un enum con arriba abajo etc
+    enum Direccion {
+        ARRIBA(0,-1),
+        ABAJO(0,1),
+        IZQUIERDA(-1,0),
+        DERECHA(1,0);
+    }
+    implementarlo en mover(Direccion.AARRIBA,mapa)
+
+ Implementar objeto (HECHO)
+
+ Implementar agua(Pared sin "aletas" transitable con aletas
+    Aletas es un objeto
+
+ Aprovechar que he implementado a donde mira el jugador para mejorar los sprites de animacion
+
+ Crear metodo renderizar entidades(incluyendo cofres etc) en teoria solucionaria el problema del cofre delante del pelo del personake
+

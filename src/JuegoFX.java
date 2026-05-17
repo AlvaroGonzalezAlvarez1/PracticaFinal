@@ -1,6 +1,9 @@
-import Pruebas.Mapa.Habitacion;
+import Estructuras.IndexedList;
+import Pruebas.Interacciones.Interactuable;
 import Pruebas.Mapa.Mapa;
+import Pruebas.Personajes.Estado;
 import Pruebas.Personajes.Jugador;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -14,77 +17,113 @@ public class JuegoFX extends Application {
     private Pane root;
     private Mapa mapa;
     private Jugador jugador;
-    private Image paredImg;
-    private Image sueloImg;
-    private Image puertaImg;
-    private Image jugadorImg;
+
+    private Image imgNormal;
+    private Image imgAgua;
     private ImageView jugadorView;
 
+    private Image[] fondos;
+    private ImageView fondoView;
 
-    private int TILE = 32; //cantidad de bits por celdas (da lo mismo, cambiar en un futuro)
+    private int habitacionActualRender=-1;
+
+    private IndexedList<ImageView> interactuablesView;
+
+    //Cantidad de bits por celdas
+    private int TILE = 16;
 
     @Override
     public void start(Stage stage) {
-
         mapa=new Mapa();
-        jugador=new Jugador(2,2,0);
+        jugador=new Jugador(5,5,0);
 
-        //Carga texturas
-        paredImg=new Image("file:./src/sprites/pared.png");
-        sueloImg = new Image("file:./src/sprites/suelo.png");
-        puertaImg = new Image("file:./src/sprites/puerta.png");
-
-        jugadorImg=new Image("file:./src/sprites/jugador.png");
-        jugadorView=new ImageView(jugadorImg);
-        jugadorView.setSmooth(false);   //Evita para el pixel-art que haga cosa raras
-
-        //Contenedor visual
         root=new Pane();
         Scene scene=new Scene(root, 800, 600);
-        scene.setOnKeyPressed(e -> {    //Cambiar en un futuro a pinchar casilla
+
+        //Habitaciones
+        fondos=new Image[7];
+        for (int i=0; i<fondos.length;i++) {
+            fondos[i]=new Image("file:./src/sprites/habitacion_" + i + ".png");
+        }
+        fondoView=new ImageView();
+        fondoView.setSmooth(false);
+        fondoView.setPreserveRatio(false);
+        fondoView.setCache(true);
+        root.getChildren().add(fondoView);
+
+        //Jugador
+        imgNormal=new Image("file:./src/sprites/jugador.png");
+        imgAgua=new Image("file:./src/sprites/jugador_agua.png");
+        jugadorView=new ImageView(imgNormal);
+        jugadorView.setSmooth(false);
+        root.getChildren().add(jugadorView);
+
+        //Interactuables
+        interactuablesView=new IndexedList<>();
+        habitacionActualRender=jugador.getHabitacionActual();
+        fondoView.setImage(fondos[jugador.getHabitacionActual()]);
+        cargarInteractuables();
+
+        //Input
+        scene.setOnKeyPressed(e -> {
             KeyCode code=e.getCode();
             switch (code) {
-                case W -> jugador.mover(0, -1, mapa);
-                case S -> jugador.mover(0, 1, mapa);
-                case A -> jugador.mover(-1, 0, mapa);
-                case D -> jugador.mover(1, 0, mapa);
+                case W -> jugador.mover(0,-1,mapa);
+                case S -> jugador.mover(0,1,mapa);
+                case A -> jugador.mover(-1,0,mapa);
+                case D -> jugador.mover(1,0,mapa);
+                case E -> {
+                    jugador.interactuar(mapa);
+                    cargarInteractuables();
+                }
             }
-            actualizarVista(); //Se crea cada interaccion
+            actualizarVista();
         });
+        //Primer render
         actualizarVista();
         stage.setScene(scene);
         stage.setTitle("Juego JavaFX");
         stage.show();
     }
 
-    //Dibuja TODA la habitacion de cero
-    private void actualizarVista() {
-        root.getChildren().clear();
-        Habitacion h=mapa.getHabitacion(jugador.getHabitacionActual());
-        for (int y=0;y<h.getCeldas().length;y++) {
-            for (int x=0;x<h.getCeldas()[y].length;x++) {
-                ImageView tile=new ImageView();
-                tile.setFitWidth(TILE);
-                tile.setFitHeight(TILE);
-                tile.setSmooth(false);
-                tile.setX(x*TILE);
-                tile.setY(y*TILE);
-                switch (h.getCeldas()[y][x].getTipo()) {
-                    case PARED->tile.setImage(paredImg);
-                    case SUELO->tile.setImage(sueloImg);
-                    case PUERTA->tile.setImage(puertaImg);
-                    case VACIO->{
-                        continue;
-                    }
-                }
-                root.getChildren().add(tile);
+
+    private void cargarInteractuables() {
+        //Eliminar visuales anteriores
+        for(int i=0;i<interactuablesView.len();i++) {
+            root.getChildren().remove(interactuablesView.get(i));
+        }
+        interactuablesView=new IndexedList<>();
+        //Recorrer interactuables del mapa
+        for(int i=0; i<mapa.getInteractuables().len();i++) {
+            Interactuable inter=mapa.getInteractuables().get(i);
+            if(inter.getHabitacion()==jugador.getHabitacionActual()) {
+                ImageView view=new ImageView(new Image(inter.getSprite()));
+                view.setX(inter.getX()*TILE+inter.getOffsetX());
+                view.setY(inter.getY()*TILE+inter.getOffsetY());
+                interactuablesView.append(view);
+                root.getChildren().add(view);
             }
         }
-        //Dibujar jugador
-        jugadorView.setX(jugador.getX() * TILE);
-        jugadorView.setY(jugador.getY() * TILE-16); //El archivo mide 16 pixeles más para prueba
-        root.getChildren().add(jugadorView);
     }
+    // Dibuja TODA la habitación de cero
+    private void actualizarVista() {
+        // Cambiar fondo solo si cambia la habitación
+        if(habitacionActualRender!=jugador.getHabitacionActual()) {
+            habitacionActualRender=jugador.getHabitacionActual();
+            fondoView.setImage(fondos[habitacionActualRender]);
+            cargarInteractuables();
+        }
+        // Mover jugador
+        jugadorView.setX(jugador.getX()*TILE-1);
+        jugadorView.setY(jugador.getY() * TILE-9);
+        if (jugador.getEstado() ==Estado.AGUA) {
+            jugadorView.setImage(imgAgua);
+        } else {
+            jugadorView.setImage(imgNormal);
+        }
+    }
+
+
 
     public static void main(String[] args) {
         launch();

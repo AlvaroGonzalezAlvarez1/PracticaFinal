@@ -7,6 +7,7 @@ public class Celda {
         this.tipo=tipo;
     }
 
+
     public Tipo getTipo() {
         return tipo;
     }
@@ -17,7 +18,7 @@ public class Celda {
 
     public boolean esTransitable(){
         boolean result=false;
-        if(tipo==Tipo.SUELO || tipo==Tipo.PUERTA){
+        if(tipo==Tipo.SUELO || tipo==Tipo.PUERTA || tipo==Tipo.AGUA){
             result=true;
         }
         return result;
