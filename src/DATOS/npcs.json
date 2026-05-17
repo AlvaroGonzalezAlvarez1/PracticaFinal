@@ -68,7 +68,7 @@
     "habitacion": 5,
     "x": 3,
     "y": 2,
-    "offsetX": -1,
+    "offsetX": 0,
     "offsetY": -11,
 
     "acciones": [

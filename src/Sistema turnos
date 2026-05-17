@@ -1,0 +1,11 @@
+TurnoJugador
+    ->
+Movimiento
+    ->
+Accion (Futuro)
+    ->
+Fin de turno
+    ->
+IA enemigos (futuro)
+    ->
+nuevo turno
