@@ -1,4 +1,4 @@
-package Pruebas.Mapa;
+package Pruebas.Mapa.Puerta;
 
 public class Puerta {
     private int xOrigen;

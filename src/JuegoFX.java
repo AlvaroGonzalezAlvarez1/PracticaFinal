@@ -1,6 +1,6 @@
 import Estructuras.IndexedList;
-import Pruebas.Interacciones.Interactuable;
-import Pruebas.Mapa.Mapa;
+import Pruebas.Interactuable.Interactuable;
+import Mapa;
 import Pruebas.Personajes.Estado;
 import Pruebas.Personajes.Jugador;
 

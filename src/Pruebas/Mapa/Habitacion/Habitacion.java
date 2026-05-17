@@ -1,4 +1,6 @@
-package Pruebas.Mapa;
+package Pruebas.Mapa.Habitacion;
+
+import Pruebas.Mapa.Celda.Celda;
 
 public class Habitacion {
     private Celda[][] celdas;

@@ -1,9 +1,9 @@
 package Pruebas.Juego;
 
-import Pruebas.Mapa.Celda;
-import Pruebas.Mapa.Habitacion;
-import Pruebas.Mapa.Mapa;
-import Pruebas.Mapa.Tipo;
+import Pruebas.Mapa.Celda.Celda;
+import Pruebas.Mapa.Habitacion.Habitacion;
+import Mapa;
+import Pruebas.Mapa.Celda.Tipo;
 import Pruebas.Personajes.Jugador;
 
 public class Game {

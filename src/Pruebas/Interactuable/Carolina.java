@@ -1,4 +1,4 @@
-package Pruebas.Interacciones;
+package Pruebas.Interactuable;
 
 import Pruebas.Personajes.Jugador;
 

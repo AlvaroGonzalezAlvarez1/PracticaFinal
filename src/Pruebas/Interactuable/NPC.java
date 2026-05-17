@@ -1,4 +1,4 @@
-package Pruebas.Interacciones;
+package Pruebas.Interactuable;
 
 public interface NPC {
     ;

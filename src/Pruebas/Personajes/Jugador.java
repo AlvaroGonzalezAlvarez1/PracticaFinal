@@ -1,8 +1,12 @@
 package Pruebas.Personajes;
 
 import Estructuras.IndexedList;
-import Pruebas.Interacciones.Interactuable;
+import Pruebas.Interactuable.Interactuable;
 import Pruebas.Mapa.*;
+import Pruebas.Mapa.Celda.Celda;
+import Pruebas.Mapa.Celda.Tipo;
+import Pruebas.Mapa.Habitacion.Habitacion;
+import Pruebas.Mapa.Puerta.Puerta;
 import Pruebas.Objetos.Objeto;
 import Pruebas.Objetos.TipoObjeto;
 
@@ -44,7 +48,7 @@ public class Jugador {
             x=nx;
             y=ny;
             actualizarEstado(mapa);
-            if (celda.getTipo()==Tipo.PUERTA) {
+            if (celda.getTipo()== Tipo.PUERTA) {
                 Puerta p=mapa.getPuerta(habitacionActual,nx,ny);
                 if (p!=null){
                     habitacionActual=p.getHabitacionDestino();

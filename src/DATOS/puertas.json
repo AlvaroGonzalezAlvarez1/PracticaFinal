@@ -1,0 +1,120 @@
+[
+  {
+    "habitacionOrigen": 4,
+    "habitacionDestino": 3,
+    "xOrigen": 13,
+    "yOrigen": 1,
+    "xDestino": 5,
+    "yDestino": 9
+  },
+  {
+    "habitacionOrigen": 3,
+    "habitacionDestino": 4,
+    "xOrigen": 5,
+    "yOrigen": 9,
+    "xDestino": 13,
+    "yDestino": 1
+  },
+
+  {
+    "habitacionOrigen": 4,
+    "habitacionDestino": 5,
+    "xOrigen": 4,
+    "yOrigen": 5,
+    "xDestino": 3,
+    "yDestino": 6
+  },
+  {
+    "habitacionOrigen": 5,
+    "habitacionDestino": 4,
+    "xOrigen": 3,
+    "yOrigen": 6,
+    "xDestino": 4,
+    "yDestino": 5
+  },
+
+  {
+    "habitacionOrigen": 3,
+    "habitacionDestino": 0,
+    "xOrigen": 5,
+    "yOrigen": 1,
+    "xDestino": 5,
+    "yDestino": 9
+  },
+  {
+    "habitacionOrigen": 0,
+    "habitacionDestino": 3,
+    "xOrigen": 5,
+    "yOrigen": 9,
+    "xDestino": 5,
+    "yDestino": 1
+  },
+
+  {
+    "habitacionOrigen": 3,
+    "habitacionDestino": 2,
+    "xOrigen": 9,
+    "yOrigen": 5,
+    "xDestino": 1,
+    "yDestino": 5
+  },
+  {
+    "habitacionOrigen": 2,
+    "habitacionDestino": 3,
+    "xOrigen": 1,
+    "yOrigen": 5,
+    "xDestino": 9,
+    "yDestino": 5
+  },
+
+  {
+    "habitacionOrigen": 1,
+    "habitacionDestino": 0,
+    "xOrigen": 1,
+    "yOrigen": 5,
+    "xDestino": 9,
+    "yDestino": 5
+  },
+  {
+    "habitacionOrigen": 0,
+    "habitacionDestino": 1,
+    "xOrigen": 9,
+    "yOrigen": 5,
+    "xDestino": 1,
+    "yDestino": 5
+  },
+
+  {
+    "habitacionOrigen": 2,
+    "habitacionDestino": 1,
+    "xOrigen": 5,
+    "yOrigen": 1,
+    "xDestino": 5,
+    "yDestino": 9
+  },
+  {
+    "habitacionOrigen": 1,
+    "habitacionDestino": 2,
+    "xOrigen": 5,
+    "yOrigen": 9,
+    "xDestino": 5,
+    "yDestino": 1
+  },
+
+  {
+    "habitacionOrigen": 0,
+    "habitacionDestino": 6,
+    "xOrigen": 5,
+    "yOrigen": 1,
+    "xDestino": 5,
+    "yDestino": 9
+  },
+  {
+    "habitacionOrigen": 6,
+    "habitacionDestino": 0,
+    "xOrigen": 5,
+    "yOrigen": 9,
+    "xDestino": 5,
+    "yDestino": 1
+  }
+]

@@ -1,4 +1,4 @@
-package Pruebas.Mapa;
+package Pruebas.Mapa.Celda;
 
 public class Celda {
     private Tipo tipo;
