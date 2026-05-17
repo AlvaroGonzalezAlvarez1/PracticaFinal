@@ -1,0 +1,103 @@
+[
+  {
+    "nombre": "Carolina",
+    "sprite": "carolina",
+    "habitacion": 1,
+    "x": 7,
+    "y": 2,
+    "offsetX": -2,
+    "offsetY": -11,
+
+    "acciones": [
+      {
+        "tipo": "hablar",
+        "mensaje": "Hola soy la bruja azul, tienes que encontrar a la bruja roja Isabel"
+      },
+
+      {
+        "tipo": "condicionEventosMensaje",
+        "eventos": ["hablo_Isabel"],
+
+        "mensajeTodos": "¿Ya la encontraste? A ver si termina y viene a verme",
+        "mensajeNinguno": "Seguro que Isabel está fumando un cigarro escondida",
+        "mensajeAlgunos": null
+      },
+
+      {
+        "tipo": "hablar",
+        "mensaje": "Siempre me hace esperar cuando baja a fumar..."
+      }
+    ]
+  },
+
+   {
+    "nombre": "Isabel",
+    "sprite": "isabel",
+    "habitacion": 4,
+    "x": 4,
+    "y": 13,
+    "offsetX": 0,
+    "offsetY": -13,
+
+    "acciones": [
+      {
+        "tipo": "hablar",
+        "mensaje": "Hola soy la bruja roja, te queda encontrar a la bruja azul Carolina"
+      },
+
+      {
+        "tipo": "condicionEventosMensaje",
+        "eventos": ["hablo_Carolina"],
+
+        "mensajeTodos": "Veo que encontraste a Carolina, termino el cigarro y voy",
+        "mensajeNinguno": "Carolina debe estar mirando el paisaje por la ventana...",
+        "mensajeAlgunos": null
+      },
+
+      {
+        "tipo": "hablar",
+        "mensaje": "A ver si me termino el cigarro ya..."
+      }
+    ]
+  },
+
+
+    {
+    "nombre": "Soldado1",
+    "sprite": "soldado",
+    "habitacion": 5,
+    "x": 3,
+    "y": 2,
+    "offsetX": -1,
+    "offsetY": -11,
+
+    "acciones": [
+      {
+        "tipo": "hablar",
+        "mensaje": "Estoy buscando a mis compañeras de grupo, si las encuentras por mi te daré un regalo"
+      },
+
+      {
+        "tipo": "condicionEventosMensaje",
+        "eventos": ["hablo_Carolina", "hablo_Isabel"],
+
+        "mensajeTodos": "Enhorabuena, ya encontraste a las dos",
+        "mensajeNinguno": "Si encuentras a las dos brujas te estaré muy agradecido",
+        "mensajeAlgunos": "Vas por buen camino, sigue buscando a la otra"
+      },
+
+      {
+        "tipo": "darObjeto",
+        "objeto": {
+        "nombre": "Antorcha",
+        "tipo": "ANTORCHA"
+        }
+      },
+
+      {
+        "tipo": "hablar",
+        "mensaje": "Ojalá le des buen uso a la antorcha"
+      }
+    ]
+  }
+]

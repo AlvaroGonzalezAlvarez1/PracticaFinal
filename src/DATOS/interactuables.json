@@ -1,0 +1,13 @@
+[  
+  {
+    "tipo": "cofre",
+    "habitacion": 6,
+    "x": 6,
+    "y": 2,
+
+    "objeto": {
+      "nombre": "Aleta",
+      "tipo": "ALETA"
+    }
+  }
+]
