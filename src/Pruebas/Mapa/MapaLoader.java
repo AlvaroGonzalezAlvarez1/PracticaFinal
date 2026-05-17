@@ -5,6 +5,7 @@ import Estructuras.IndexedList;
 import Pruebas.Mapa.Celda.Celda;
 import Pruebas.Mapa.Celda.Tipo;
 import Pruebas.Mapa.Habitacion.Habitacion;
+import Pruebas.Mapa.Habitacion.HabitacionData;
 import Pruebas.Mapa.Puerta.Puerta;
 import Pruebas.Mapa.Puerta.PuertaData;
 

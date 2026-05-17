@@ -2,8 +2,8 @@ package Pruebas.Juego;
 
 import Pruebas.Mapa.Celda.Celda;
 import Pruebas.Mapa.Habitacion.Habitacion;
-import Mapa;
 import Pruebas.Mapa.Celda.Tipo;
+import Pruebas.Mapa.Mapa;
 import Pruebas.Personajes.Jugador;
 
 public class Game {
