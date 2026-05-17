@@ -14,6 +14,7 @@ public class Jugador {
 
     private int x;
     private int y;
+    private int rango;
     private int habitacionActual;
     //Para saber a donde mira el jugador, de momento para poder
     //abrir cofres, cuando metamos movimiento por raton
@@ -29,6 +30,7 @@ public class Jugador {
     public Jugador(int x,int y,int habitacionInicial) {
         this.x=x;
         this.y=y;
+        rango=5;
         this.habitacionActual=habitacionInicial;
         dirX=0;
         dirY=1;
@@ -152,6 +154,10 @@ public class Jugador {
 
     public int getY() {
         return y;
+    }
+
+    public int getRango() {
+        return rango;
     }
 
     public Estado getEstado() {

@@ -4,6 +4,7 @@ import Pruebas.Mapa.Mapa;
 import Pruebas.Personajes.Estado;
 import Pruebas.Personajes.Jugador;
 
+import Pruebas.Personajes.Posicion;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -15,6 +16,7 @@ import javafx.scene.image.ImageView;
 public class JuegoFX extends Application {
 
     private Pane root;
+    private Pane capaRango;
     private Mapa mapa;
     private Jugador jugador;
 
@@ -24,6 +26,8 @@ public class JuegoFX extends Application {
 
     private Image[] fondos;
     private ImageView fondoView;
+    private Image tileRangoIm;
+    private IndexedList<ImageView> areaView;
 
     private int habitacionActualRender=-1;
 
@@ -36,8 +40,10 @@ public class JuegoFX extends Application {
     public void start(Stage stage) {
         mapa=new Mapa();
         jugador=new Jugador(5,5,0);
-
+        tileRangoIm=new Image("file:./src/sprites/tile_rango.png");
+        areaView=new IndexedList<>();
         root=new Pane();
+        capaRango=new Pane();
         Scene scene=new Scene(root, 800, 600);
 
         //Habitaciones
@@ -50,6 +56,7 @@ public class JuegoFX extends Application {
         fondoView.setPreserveRatio(false);
         fondoView.setCache(true);
         root.getChildren().add(fondoView);
+        root.getChildren().add(capaRango);
 
         //Jugador
         imgNormal=new Image("file:./src/sprites/jugador.png");
@@ -113,6 +120,7 @@ public class JuegoFX extends Application {
             fondoView.setImage(fondos[habitacionActualRender]);
             cargarInteractuables();
         }
+        pintarAreaMovimiento();
         // Mover jugador
         jugadorView.setX(jugador.getX()*TILE-1);
         jugadorView.setY(jugador.getY() * TILE-9);
@@ -123,7 +131,25 @@ public class JuegoFX extends Application {
         }
     }
 
-
+    private void pintarAreaMovimiento() {
+        // borrar anterior
+        if(areaView!=null){
+            for(int i=0;i<areaView.len();i++){
+                root.getChildren().remove(areaView.get(i));
+            }
+        }
+        areaView=new IndexedList<>();
+        capaRango.getChildren().clear();
+        IndexedList<Posicion> area=mapa.getHabitacion(jugador.getHabitacionActual()).getAreaMovimiento(jugador,jugador.getX(),jugador.getY(),jugador.getRango());
+        for(int i=0;i<area.len();i++){
+            Posicion p=area.get(i);
+            ImageView tile=new ImageView(tileRangoIm);
+            tile.setX(p.getX()*TILE);
+            tile.setY(p.getY()*TILE);
+            areaView.append(tile);
+            capaRango.getChildren().add(tile);
+        }
+    }
 
     public static void main(String[] args) {
         launch();

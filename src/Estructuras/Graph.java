@@ -290,6 +290,39 @@ public class Graph<DN,DA>{
         return result;
     }
 
+    public IndexedList<DN> BFSConDistancia(DN start, int maxDistancia){
+        IndexedList<DN> result=new IndexedList<>();
+        IndexedList<DN> visited=new IndexedList<>();
+        Queue<GraphNode<DN>> queue=new Queue<>();
+        Queue<Integer> distQueue=new Queue<>();
+        GraphNode<DN> startNode=getNode(start);
+        if(startNode!=null){
+            queue.enqueue(startNode);
+            distQueue.enqueue(0);
+            visited.append(start);
+            while(queue.isEmpty()==false){
+                GraphNode<DN> current=queue.dequeue();
+                int dist=distQueue.dequeue();
+                result.append(current.getData());
+                if(dist<maxDistancia){
+                    IndexedList<GraphNode<DN>> neigh=neighbors(current.getData());
+                    int i=0;
+                    while(i<neigh.len()){
+                        GraphNode<DN> aux=neigh.get(i);
+                        DN data=aux.getData();
+                        if(visited.contains(data)==false){
+                            visited.append(data);
+                            queue.enqueue(aux);
+                            distQueue.enqueue(dist + 1);
+                        }
+                        i++;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
     //Búsqueda en profundidad, usando la cola
     public IndexedList<DN> DFS(DN start){
         IndexedList<DN> result=new IndexedList<>();
