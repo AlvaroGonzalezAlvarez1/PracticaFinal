@@ -21,4 +21,7 @@ public class InteractuableData {
 
     // COFRE
     public ObjetoData objeto;
+
+    //PUERTA CERRADA
+    public String orientacion;
 }

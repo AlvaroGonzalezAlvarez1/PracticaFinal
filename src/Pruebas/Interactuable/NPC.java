@@ -53,11 +53,6 @@ public class NPC extends Interactuable {
         faseActual++;
     }
 
-    public void setFaseActual(int faseActual) {
-        this.faseActual = faseActual;
-    }
-
-
     @Override
     public String getSprite() {
         return "file:./src/sprites/"+sprite+".png";

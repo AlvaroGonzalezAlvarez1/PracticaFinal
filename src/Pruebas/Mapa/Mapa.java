@@ -3,10 +3,13 @@ package Pruebas.Mapa;
 import Estructuras.Graph;
 import Estructuras.IndexedList;
 import Pruebas.Interactuable.*;
+import Pruebas.Mapa.Celda.Celda;
+import Pruebas.Mapa.Celda.Tipo;
 import Pruebas.Mapa.Habitacion.Habitacion;
 import Pruebas.Mapa.Puerta.Puerta;
 import Pruebas.Objetos.Objeto;
 import Pruebas.Objetos.TipoObjeto;
+import Pruebas.Personajes.Jugador;
 
 public class Mapa {
     private Graph<Integer,Integer> grafo;
@@ -64,6 +67,20 @@ public class Mapa {
             j++;
         }
         return resultado;
+    }
+
+    public void aplicarEventos(Jugador jugador){
+        int id=jugador.getHabitacionActual();
+        Habitacion h=habitaciones.get(id);
+        Celda[][]celdas=h.getCeldas();
+        for(int y=0;y<celdas.length;y++){
+            for(int x=0;x<celdas[y].length;x++){
+                String evento="puerta_abierta_"+id+"_"+x+"_"+y;
+                if(jugador.tieneEvento(evento)){
+                    celdas[y][x].setTipo(Tipo.PUERTA);
+                }
+            }
+        }
     }
 
     //Lo usa luego JuegoFX para cargar los Sprites

@@ -36,4 +36,8 @@ public abstract class Interactuable {
     public int getOffsetY() {
         return 0;
     }
+
+    public boolean esVisible(){
+        return true;
+    }
 }

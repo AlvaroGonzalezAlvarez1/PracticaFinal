@@ -20,5 +20,36 @@
       "nombre": "Llave",
       "tipo": "LLAVE"
     }
+  },
+  {
+    "tipo": "puertaCerrada",
+    "habitacion": 7,
+    "x": 1,
+    "y": 5,
+    "orientacion": "derecha"
+  },
+  {
+    "tipo": "fogata",
+    "habitacion": 8,
+    "x": 2,
+    "y": 2
+  },
+  {
+    "tipo": "fogata",
+    "habitacion": 8,
+    "x": 2,
+    "y": 8
+  },
+  {
+  "tipo": "fogata",
+  "habitacion": 8,
+  "x": 8,
+  "y": 2
+  },
+  {
+    "tipo": "fogata",
+    "habitacion": 8,
+    "x": 8,
+    "y": 8
   }
 ]

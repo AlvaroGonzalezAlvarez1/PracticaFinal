@@ -49,7 +49,7 @@ public class JuegoFX extends Application{
         crearJugador();                 // Crea y añade el jugador a la escena
         renderInteractuables();         // Carga los objetos interactuables en pantalla
         configurarControles();          // Configura el teclado/controles
-        actualizarVista();           // Dibuja el primer estado del juego en pantalla
+        actualizarVista();              // Dibuja el primer estado del juego en pantalla
         stage.show();                   // Muestra la ventana
     }
 
@@ -82,7 +82,7 @@ public class JuegoFX extends Application{
         tileRangoIm=new Image("file:./src/sprites/tile_rango.png");
         imgNormal=new Image("file:./src/sprites/jugador.png");
         imgAgua=new Image("file:./src/sprites/jugador_agua.png");
-        fondos=new Image[8];
+        fondos=new Image[9];
         for (int i=0;i<fondos.length; i++) {
             fondos[i]=new Image("file:./src/sprites/habitacion_"+ i+".png");
         }
@@ -105,7 +105,7 @@ public class JuegoFX extends Application{
         //Recorrer interactuables del mapa
         for(int i=0; i<mapa.getInteractuables().len();i++) {
             Interactuable inter=mapa.getInteractuables().get(i);
-            if(inter.getHabitacion()==habitacion) {
+            if(inter.getHabitacion()==habitacion && inter.esVisible()) {
                 ImageView view=new ImageView(new Image(inter.getSprite()));
                 view.setX(inter.getX()*TILE+inter.getOffsetX());
                 view.setY(inter.getY()*TILE+inter.getOffsetY());
@@ -119,12 +119,14 @@ public class JuegoFX extends Application{
         scene.setOnKeyPressed(e -> {
             KeyCode code=e.getCode();
             switch(code){
-                case W -> jugador.mover(0,-1,mapa);
-                case S -> jugador.mover(0,1,mapa);
-                case A -> jugador.mover(-1,0,mapa);
-                case D -> jugador.mover(1,0,mapa);
+                case W ->jugador.mover(0,-1,mapa);
+                case S ->jugador.mover(0,1,mapa);
+                case A ->jugador.mover(-1,0,mapa);
+                case D ->jugador.mover(1,0,mapa);
+                case Q -> jugador.imprimirEventos();
                 case E -> {
                     jugador.interactuar(mapa);
+                    mapa.aplicarEventos(jugador);
                     renderInteractuables();
                 }
             }
@@ -136,7 +138,6 @@ public class JuegoFX extends Application{
         if (habitacionActualRender!=jugador.getHabitacionActual()) {
             habitacionActualRender=jugador.getHabitacionActual();
             fondoView.setImage(fondos[habitacionActualRender]);
-            renderInteractuables();
         }
     }
 
@@ -158,6 +159,7 @@ public class JuegoFX extends Application{
         actualizarEstadoJuego();
         pintarAreaMovimiento();
         renderJugador();
+        renderInteractuables();
     }
 
     private void pintarAreaMovimiento() {

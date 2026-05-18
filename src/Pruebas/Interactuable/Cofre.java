@@ -19,8 +19,10 @@ public class Cofre extends Interactuable{
 
     @Override
     public void interactuar(Jugador jugador){
+        String evento="cofre_"+getHabitacion()+"_"+getX()+"_"+getY();
         if(abierto==false){
             abierto=true;
+            jugador.activarEvento(evento);
             jugador.anadirObjeto(objeto);
         }
     }

@@ -76,13 +76,16 @@ public class Jugador {
         return resultado;
     }
 
-    public void eliminarObjeto(TipoObjeto tipo) {
+    public void eliminarObjeto(TipoObjeto tipo){    //Cambiar a eliminar Objeto
         boolean eliminado=false;
         int i=0;
         while(i<inventario.len() && eliminado==false) {
             if(inventario.get(i).getTipo()==tipo) {
                 inventario.delete(i);
                 eliminado=true;
+                String evento="uso_"+tipo.name();
+                activarEvento(evento);
+                System.out.println("Has usado: "+tipo);
             }
             i++;
         }
@@ -99,6 +102,8 @@ public class Jugador {
 
     public void anadirObjeto(Objeto objeto){
         inventario.append(objeto);
+        String evento="recibir_"+objeto.getTipo().name();
+        activarEvento(evento);
         System.out.println("Has recibidio: "+objeto.getNombre());
 
     }
@@ -162,5 +167,13 @@ public class Jugador {
 
     public Estado getEstado() {
         return estado;
+    }
+
+    public void imprimirEventos(){
+        System.out.println("=== EVENTOS DEL JUGADOR ===");
+        for(int i=0;i<eventos.len();i++){
+            System.out.println(eventos.get(i));
+        }
+        System.out.println("===========================");
     }
 }

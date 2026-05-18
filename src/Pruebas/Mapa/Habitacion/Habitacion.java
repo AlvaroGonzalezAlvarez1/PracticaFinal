@@ -3,6 +3,7 @@ package Pruebas.Mapa.Habitacion;
 import Estructuras.Graph;
 import Estructuras.IndexedList;
 import Pruebas.Mapa.Celda.Celda;
+import Pruebas.Mapa.Celda.Tipo;
 import Pruebas.Personajes.Jugador;
 import Pruebas.Personajes.Posicion;
 

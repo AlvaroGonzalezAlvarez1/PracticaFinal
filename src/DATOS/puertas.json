@@ -133,5 +133,22 @@
     "yOrigen": 5,
     "xDestino": 9,
     "yDestino": 5
+  },
+
+  {
+    "habitacionOrigen": 8,
+    "habitacionDestino": 7,
+    "xOrigen": 9,
+    "yOrigen": 5,
+    "xDestino": 1,
+    "yDestino": 5
+  },
+  {
+    "habitacionOrigen": 7,
+    "habitacionDestino": 8,
+    "xOrigen": 1,
+    "yOrigen": 5,
+    "xDestino": 9,
+    "yDestino": 5
   }
 ]

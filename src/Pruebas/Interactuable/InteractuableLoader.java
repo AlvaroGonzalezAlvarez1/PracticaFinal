@@ -16,7 +16,6 @@ public class InteractuableLoader {
                 resultado.append(crearNPC(d));
             }
         }
-
         InteractuableData[] interactuables = GsonUtil.cargarArray("src/DATOS/interactuables.json",InteractuableData[].class);
         if (interactuables!=null) {
             for (InteractuableData d:interactuables) {
@@ -41,6 +40,8 @@ public class InteractuableLoader {
         Interactuable result;
         switch (data.tipo) {
             case "cofre"->result=new Cofre(data.habitacion,data.x,data.y,new Objeto(data.objeto.nombre,reconocerTipoObjeto(data.objeto.tipo)));
+            case "puertaCerrada"->result=new PuertaCerrada(data.habitacion, data.x, data.y, data.orientacion);
+            case "fogata"->result=new Fogata(data.habitacion, data.x, data.y);
             default->throw new IllegalArgumentException("Interactuable desconocido: "+data.tipo);
         }
         return result;
