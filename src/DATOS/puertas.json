@@ -116,5 +116,22 @@
     "yOrigen": 9,
     "xDestino": 5,
     "yDestino": 1
+  },
+
+  {
+    "habitacionOrigen": 7,
+    "habitacionDestino": 6,
+    "xOrigen": 9,
+    "yOrigen": 5,
+    "xDestino": 1,
+    "yDestino": 5
+  },
+  {
+    "habitacionOrigen": 6,
+    "habitacionDestino": 7,
+    "xOrigen": 1,
+    "yOrigen": 5,
+    "xDestino": 9,
+    "yDestino": 5
   }
 ]

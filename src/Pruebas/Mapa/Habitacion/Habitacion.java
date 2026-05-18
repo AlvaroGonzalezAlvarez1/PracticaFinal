@@ -13,7 +13,6 @@ public class Habitacion {
         this.celdas=celdas;
     }
 
-
     private boolean dentro(int x, int y){
         return y>=0 && y<celdas.length && x>=0 && x<celdas[y].length;
     }

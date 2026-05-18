@@ -9,5 +9,16 @@
       "nombre": "Aleta",
       "tipo": "ALETA"
     }
+  },
+  {
+    "tipo": "cofre",
+    "habitacion": 7,
+    "x": 2,
+    "y": 2,
+
+    "objeto": {
+      "nombre": "Llave",
+      "tipo": "LLAVE"
+    }
   }
 ]

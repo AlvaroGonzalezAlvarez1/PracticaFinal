@@ -1,5 +1,6 @@
 import Estructuras.IndexedList;
 import Pruebas.Interactuable.Interactuable;
+import Pruebas.Mapa.Celda.Celda;
 import Pruebas.Mapa.Mapa;
 import Pruebas.Personajes.Estado;
 import Pruebas.Personajes.Jugador;
@@ -66,6 +67,13 @@ public class JuegoFX extends Application{
         fondoView.setPreserveRatio(false);
         fondoView.setCache(true);
         root.getChildren().addAll(fondoView, capaRango);
+        //Recentrar al cambiar el tamaño de la ventana
+        scene.widthProperty().addListener((obs,oldVal,newVal) -> {
+            actualizarVista();
+        });
+        scene.heightProperty().addListener((obs,oldVal,newVal)->{
+            actualizarVista();
+        });
         stage.setScene(scene);
         stage.setTitle("Juego JavaFX");
     }
@@ -74,7 +82,7 @@ public class JuegoFX extends Application{
         tileRangoIm=new Image("file:./src/sprites/tile_rango.png");
         imgNormal=new Image("file:./src/sprites/jugador.png");
         imgAgua=new Image("file:./src/sprites/jugador_agua.png");
-        fondos=new Image[7];
+        fondos=new Image[8];
         for (int i=0;i<fondos.length; i++) {
             fondos[i]=new Image("file:./src/sprites/habitacion_"+ i+".png");
         }
@@ -143,6 +151,10 @@ public class JuegoFX extends Application{
     }
 
     private void actualizarVista() {
+        Celda[][] celdas=mapa.getHabitacion(jugador.getHabitacionActual()).getCeldas();
+        int ancho=celdas[0].length;
+        int alto=celdas.length;
+        centrarMapa(ancho,alto);
         actualizarEstadoJuego();
         pintarAreaMovimiento();
         renderJugador();
@@ -166,6 +178,13 @@ public class JuegoFX extends Application{
             areaView.append(tile);
             capaRango.getChildren().add(tile);
         }
+    }
+
+    private void centrarMapa(int anchoTiles, int altoTiles) {
+        double anchoMapa=anchoTiles*TILE;
+        double altoMapa=altoTiles*TILE;
+        root.setLayoutX((scene.getWidth()-anchoMapa)/2);
+        root.setLayoutY((scene.getHeight()-altoMapa)/2);
     }
 
     public static void main(String[] args) {
