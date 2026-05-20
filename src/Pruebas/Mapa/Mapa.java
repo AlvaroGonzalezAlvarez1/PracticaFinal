@@ -7,8 +7,6 @@ import Pruebas.Mapa.Celda.Celda;
 import Pruebas.Mapa.Celda.Tipo;
 import Pruebas.Mapa.Habitacion.Habitacion;
 import Pruebas.Mapa.Puerta.Puerta;
-import Pruebas.Objetos.Objeto;
-import Pruebas.Objetos.TipoObjeto;
 import Pruebas.Personajes.Jugador;
 
 public class Mapa {
@@ -70,14 +68,25 @@ public class Mapa {
     }
 
     public void aplicarEventos(Jugador jugador){
-        int id=jugador.getHabitacionActual();
-        Habitacion h=habitaciones.get(id);
-        Celda[][]celdas=h.getCeldas();
-        for(int y=0;y<celdas.length;y++){
-            for(int x=0;x<celdas[y].length;x++){
-                String evento="puerta_abierta_"+id+"_"+x+"_"+y;
-                if(jugador.tieneEvento(evento)){
-                    celdas[y][x].setTipo(Tipo.PUERTA);
+        for(int i=0;i<jugador.getEventos().len();i++){
+            String evento=jugador.getEventos().get(i);
+            if(evento.startsWith("puerta_abierta_")){
+                String[] partes=evento.split("_");
+                String habitacion=partes[2];
+                String x=partes[3];
+                String y=partes[4];
+                Habitacion hab=habitaciones.get(Integer.parseInt(habitacion));
+                hab.getCeldas()[Integer.parseInt(y)][Integer.parseInt(x)].setTipo(Tipo.PUERTA);
+            }
+            else if(evento.startsWith("palanca_activa_")){
+                String[] partes=evento.split("_");
+                int habitacion=Integer.parseInt(partes[2]);
+                Habitacion hab=habitaciones.get(habitacion);
+                Celda[][] celdas= hab.getCeldas();
+                for(int j=5;j<partes.length;j+=3){
+                    int x=Integer.parseInt(partes[j]);
+                    int y=Integer.parseInt(partes[j+1]);
+                    celdas[y][x].setTipo(Tipo.SUELO);
                 }
             }
         }

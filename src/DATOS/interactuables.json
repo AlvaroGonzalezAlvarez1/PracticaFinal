@@ -51,5 +51,16 @@
     "habitacion": 8,
     "x": 8,
     "y": 8
+  },
+  {
+    "tipo":"palanca",
+    "habitacion":8,
+    "x":7,
+    "y":6,
+    "posiciones":[
+      6,5,0,
+      5,5,0,
+      4,5,0
+    ]
   }
 ]

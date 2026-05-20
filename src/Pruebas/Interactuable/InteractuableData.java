@@ -1,5 +1,6 @@
 package Pruebas.Interactuable;
 
+import Estructuras.IndexedList;
 import Pruebas.Interactuable.Acciones.AccionData;
 import Pruebas.Objetos.Objeto;
 import Pruebas.Objetos.ObjetoData;
@@ -24,4 +25,7 @@ public class InteractuableData {
 
     //PUERTA CERRADA
     public String orientacion;
+
+    //PALANCA
+    public int[] posiciones;
 }

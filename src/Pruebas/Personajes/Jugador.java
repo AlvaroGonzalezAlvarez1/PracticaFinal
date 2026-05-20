@@ -91,15 +91,6 @@ public class Jugador {
         }
     }
 
-    public void interactuar(Mapa mapa){
-        int tx=x+dirX;
-        int ty=y+dirY;
-        Interactuable i= mapa.getInteractuable(habitacionActual,tx,ty);
-        if(i!=null){
-            i.interactuar(this);
-        }
-    }
-
     public void anadirObjeto(Objeto objeto){
         inventario.append(objeto);
         String evento="recibir_"+objeto.getTipo().name();
@@ -118,6 +109,15 @@ public class Jugador {
         return resultado;
     }
 
+    public void interactuar(Mapa mapa){
+        int tx=x+dirX;
+        int ty=y+dirY;
+        Interactuable i= mapa.getInteractuable(habitacionActual,tx,ty);
+        if(i!=null){
+            i.interactuar(this);
+        }
+    }
+
     public void actualizarEstado(Mapa mapa) {
         Habitacion h=mapa.getHabitacion(habitacionActual);
         Celda celda=h.getCeldas()[y][x];
@@ -126,6 +126,10 @@ public class Jugador {
         } else {
             estado=Estado.NORMAL;
         }
+    }
+
+    public IndexedList<String> getEventos() {
+        return eventos;
     }
 
     //Para dialogos dinamicos, abrir puertas, derrotar enemigos etc

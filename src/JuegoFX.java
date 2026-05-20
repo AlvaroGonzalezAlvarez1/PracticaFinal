@@ -36,6 +36,7 @@ public class JuegoFX extends Application{
     private ImageView fondoView;
     private IndexedList<ImageView> areaView;
     private IndexedList<ImageView> interactuablesView;
+    private IndexedList<ImageView> puentesView;
 
     //CONFIG
     private final int TILE = 16;
@@ -115,6 +116,47 @@ public class JuegoFX extends Application{
         }
     }
 
+    private void renderPuentes(){
+        // BORRAR ANTERIORES
+        if(puentesView!=null){
+            for(int i=0;i<puentesView.len();i++){
+                root.getChildren().remove(
+                        puentesView.get(i));
+            }
+        }
+        puentesView=new IndexedList<>();
+        // RECORRER EVENTOS
+        for(int i=0;i<jugador.getEventos().len();i++){
+            String evento=jugador.getEventos().get(i);
+            if(evento.startsWith("palanca_activa_")){
+                String[] partes=evento.split("_");
+                int habitacion=Integer.parseInt(partes[2]);
+                //Solo renderiza habitación actual
+                if(habitacion==jugador.getHabitacionActual()){
+                    for(int j=5;j<partes.length;j+=3){
+                        int x=Integer.parseInt(partes[j]);
+                        int y=Integer.parseInt(partes[j+1]);
+                        int sprite=Integer.parseInt(partes[j+2]);
+                        String ruta="";
+                        //0 horizontal
+                        if(sprite==0){
+                            ruta="file:./src/sprites/puente_horizontal.png";
+                        }
+                        //1 vertical
+                        else{
+                            ruta="file:./src/sprites/puente_vertical.png";
+                        }
+                        ImageView view=new ImageView(new Image(ruta));
+                        view.setX(x*TILE);
+                        view.setY(y*TILE);
+                        puentesView.append(view);
+                        root.getChildren().add(view);
+                    }
+                }
+            }
+        }
+    }
+
     private void configurarControles() {
         scene.setOnKeyPressed(e -> {
             KeyCode code=e.getCode();
@@ -160,6 +202,7 @@ public class JuegoFX extends Application{
         pintarAreaMovimiento();
         renderJugador();
         renderInteractuables();
+        renderPuentes();
     }
 
     private void pintarAreaMovimiento() {

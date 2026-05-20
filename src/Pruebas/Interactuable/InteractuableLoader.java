@@ -41,7 +41,8 @@ public class InteractuableLoader {
         switch (data.tipo) {
             case "cofre"->result=new Cofre(data.habitacion,data.x,data.y,new Objeto(data.objeto.nombre,reconocerTipoObjeto(data.objeto.tipo)));
             case "puertaCerrada"->result=new PuertaCerrada(data.habitacion, data.x, data.y, data.orientacion);
-            case "fogata"->result=new Fogata(data.habitacion, data.x, data.y);
+            case "fogata"->result=new Fogata(data.habitacion,data.x,data.y);
+            case "palanca"->result=new Palanca(data.habitacion, data.x,data.y,arrayAIndexedList(data.posiciones));
             default->throw new IllegalArgumentException("Interactuable desconocido: "+data.tipo);
         }
         return result;
@@ -69,5 +70,13 @@ public class InteractuableLoader {
             }
         }
         return acciones;
+    }
+
+    private static IndexedList<Integer> arrayAIndexedList(int[] datos){
+        IndexedList<Integer>resultado=new IndexedList<>();
+        for(int i=0;i<datos.length;i++){
+            resultado.append(datos[i]);
+        }
+        return resultado;
     }
 }

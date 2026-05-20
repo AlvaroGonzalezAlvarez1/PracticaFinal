@@ -2,10 +2,10 @@ TurnoJugador
     ->
 Movimiento
     ->
-Accion (Futuro)
+Accion
     ->
 Fin de turno
     ->
-IA enemigos (futuro)
+IA enemigos
     ->
 nuevo turno

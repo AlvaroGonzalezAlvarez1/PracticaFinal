@@ -1,5 +1,7 @@
 package Pruebas.Juego;
 
+//CLASE DESACTUALIZADA, BORRAR
+
 import Pruebas.Mapa.Celda.Celda;
 import Pruebas.Mapa.Habitacion.Habitacion;
 import Pruebas.Mapa.Celda.Tipo;
