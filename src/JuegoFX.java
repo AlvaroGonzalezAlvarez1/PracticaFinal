@@ -21,7 +21,15 @@ public class JuegoFX extends Application{
 
     //JAVA FX
     private Pane root;
+
+    private Pane capaJuego;
+
+    private Pane capaFondo;
+    private Pane capaPuentes;
+    private Pane capaInteractuables;
     private Pane capaRango;
+    private Pane capaJugador;
+    private Pane capaUI;
     private Scene scene;
 
     //SPRITES
@@ -60,14 +68,23 @@ public class JuegoFX extends Application{
     }
 
     private void inicializarInterfaz(Stage stage) {
-        root=new Pane();
+        root = new Pane();
+
+        capaJuego=new Pane();
+        capaFondo=new Pane();
+        capaPuentes=new Pane();
+        capaInteractuables=new Pane();
         capaRango=new Pane();
+        capaJugador=new Pane();
+        capaUI=new Pane();
+        capaJuego.getChildren().addAll(capaFondo,capaPuentes,capaInteractuables,capaRango,capaJugador);
         scene=new Scene(root,800,600);
         fondoView=new ImageView();
+        capaFondo.getChildren().add(fondoView);
         fondoView.setSmooth(false);
         fondoView.setPreserveRatio(false);
         fondoView.setCache(true);
-        root.getChildren().addAll(fondoView, capaRango);
+        root.getChildren().addAll(capaJuego,capaUI);
         //Recentrar al cambiar el tamaño de la ventana
         scene.widthProperty().addListener((obs,oldVal,newVal) -> {
             actualizarVista();
@@ -92,15 +109,14 @@ public class JuegoFX extends Application{
     private void crearJugador() {
         jugadorView=new ImageView(imgNormal);
         jugadorView.setSmooth(false);
-        root.getChildren().add(jugadorView);
+        capaJugador.getChildren().add(jugadorView);
         interactuablesView=new IndexedList<>();
     }
 
     private void renderInteractuables() {
         //Eliminar visuales anteriores
         for(int i=0;i<interactuablesView.len();i++) {
-            root.getChildren().remove(interactuablesView.get(i));
-        }
+            capaInteractuables.getChildren().remove(interactuablesView.get(i));        }
         interactuablesView=new IndexedList<>();
         int habitacion=jugador.getHabitacionActual();
         //Recorrer interactuables del mapa
@@ -111,8 +127,7 @@ public class JuegoFX extends Application{
                 view.setX(inter.getX()*TILE+inter.getOffsetX());
                 view.setY(inter.getY()*TILE+inter.getOffsetY());
                 interactuablesView.append(view);
-                root.getChildren().add(view);
-            }
+                capaInteractuables.getChildren().add(view);            }
         }
     }
 
@@ -120,8 +135,8 @@ public class JuegoFX extends Application{
         // BORRAR ANTERIORES
         if(puentesView!=null){
             for(int i=0;i<puentesView.len();i++){
-                root.getChildren().remove(
-                        puentesView.get(i));
+                capaPuentes.getChildren().remove(puentesView.get(i));
+                puentesView.get(i);
             }
         }
         puentesView=new IndexedList<>();
@@ -150,7 +165,7 @@ public class JuegoFX extends Application{
                         view.setX(x*TILE);
                         view.setY(y*TILE);
                         puentesView.append(view);
-                        root.getChildren().add(view);
+                        capaPuentes.getChildren().add(view);
                     }
                 }
             }
@@ -185,7 +200,7 @@ public class JuegoFX extends Application{
 
     private void renderJugador() {
         jugadorView.setX(jugador.getX()*TILE-1);
-        jugadorView.setY(jugador.getY() * TILE-9);
+        jugadorView.setY(jugador.getY()*TILE-9);
         if (jugador.getEstado() ==Estado.AGUA) {
             jugadorView.setImage(imgAgua);
         } else {
@@ -228,8 +243,8 @@ public class JuegoFX extends Application{
     private void centrarMapa(int anchoTiles, int altoTiles) {
         double anchoMapa=anchoTiles*TILE;
         double altoMapa=altoTiles*TILE;
-        root.setLayoutX((scene.getWidth()-anchoMapa)/2);
-        root.setLayoutY((scene.getHeight()-altoMapa)/2);
+        capaJuego.setLayoutX((scene.getWidth()-anchoMapa)/2);
+        capaJuego.setLayoutY((scene.getHeight()-altoMapa)/2);
     }
 
     public static void main(String[] args) {
