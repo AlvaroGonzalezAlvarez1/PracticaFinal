@@ -29,6 +29,17 @@
     "orientacion": "derecha"
   },
   {
+    "tipo": "cofre",
+    "habitacion": 8,
+    "x": 7,
+    "y": 2,
+
+    "objeto": {
+      "nombre": "Antorcha",
+      "tipo": "ANTORCHA"
+    }
+  },
+  {
     "tipo": "fogata",
     "habitacion": 8,
     "x": 2,

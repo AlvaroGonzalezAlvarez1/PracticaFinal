@@ -133,7 +133,7 @@ public class JuegoFX extends Application{
     }
 
     private void renderPuentes(){
-        // BORRAR ANTERIORES
+        //BORRAR ANTERIORES
         if(puentesView!=null){
             for(int i=0;i<puentesView.len();i++){
                 capaPuentes.getChildren().remove(puentesView.get(i));
@@ -141,7 +141,7 @@ public class JuegoFX extends Application{
             }
         }
         puentesView=new IndexedList<>();
-        // RECORRER EVENTOS
+        //RECORRER EVENTOS
         for(int i=0;i<jugador.getEventos().len();i++){
             String evento=jugador.getEventos().get(i);
             if(evento.startsWith("palanca_activa_")){
@@ -180,12 +180,10 @@ public class JuegoFX extends Application{
             int tileX=(int)(mouseX/TILE);
             int tileY=(int)(mouseY/TILE);
             Interactuable inter=mapa.getInteractuable(jugador.getHabitacionActual(),tileX,tileY);
-            boolean haInteractuado=false;
             if(inter!=null && jugador.estaAlLado(tileX,tileY)){
                 jugador.mirarHacia(tileX,tileY);
                 jugador.interactuar(mapa);
                 mapa.aplicarEventos(jugador);
-                haInteractuado=true;
             }
             if(celdaEnRango(tileX,tileY)){
                 jugador.moverA(tileX,tileY,mapa);

@@ -53,6 +53,7 @@ public class InteractuableLoader {
         switch (tipo){
             case "ALETA"->result=TipoObjeto.ALETA;
             case "LLAVE"->result=TipoObjeto.LLAVE;
+            case "ANTORCHA"->result=TipoObjeto.ANTORCHA;
             default -> throw new IllegalArgumentException("Tipo de objeto desconocido: "+tipo);
         }
         return result;
