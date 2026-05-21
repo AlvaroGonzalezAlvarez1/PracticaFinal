@@ -203,8 +203,7 @@ public class JuegoFX extends Application{
             double mouseY=e.getSceneY()-capaJuego.getLayoutY();
             int tileX=(int)(mouseX/TILE);
             int tileY=(int)(mouseY/TILE);
-            Interactuable inter=mapa.getInteractuable(jugador.getHabitacionActual(),tileX,tileY);
-            if(inter!=null && jugador.estaAlLado(tileX,tileY)){
+            if(jugador.estaAlLado(tileX,tileY)){
                 jugador.mirarHacia(tileX,tileY);
                 jugador.interactuar(mapa);
                 mapa.aplicarEventos(jugador);

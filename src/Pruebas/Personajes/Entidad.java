@@ -69,15 +69,19 @@ public abstract class Entidad {
     }
 
     public boolean estaVivo() {
-        boolean vivo=true;
-        if(vida<0){
-            vivo=false;
-        }
-        return vivo;
+        return vida>0;
     }
 
     public int getHabitacionActual() {
         return habitacionActual;
+    }
+
+    public int getVida() {
+        return vida;
+    }
+
+    public int getVidaMax() {
+        return vidaMax;
     }
 
     public abstract void moverA(int xDestino, int yDestino, Mapa mapa);

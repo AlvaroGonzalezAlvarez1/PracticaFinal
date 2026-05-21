@@ -27,9 +27,9 @@ public class Mapa {
         for(int i=0;i<puertas.len(); i++) {
             Puerta p=puertas.get(i);
             grafo.addEdge(p.getHabitacionOrigen(), p.getHabitacionDestino(), null);
-            habitaciones.get(3).addEnemigo(new Enemigo(3,3,2,20,20,4,1,"enemigo",-6,-12)
-            );
         }
+        habitaciones.get(3).addEnemigo(new Enemigo(3,3,2,10,10,4,1,"enemigo",-6,-12));
+
     }
 
     public Habitacion getHabitacion(int index) {

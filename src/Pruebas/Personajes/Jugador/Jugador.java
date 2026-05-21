@@ -9,6 +9,7 @@ import Pruebas.Mapa.Habitacion.Habitacion;
 import Pruebas.Mapa.Puerta.Puerta;
 import Pruebas.Objetos.Objeto;
 import Pruebas.Objetos.TipoObjeto;
+import Pruebas.Personajes.Enemigo.Enemigo;
 import Pruebas.Personajes.Entidad;
 import Pruebas.Personajes.Estado;
 
@@ -34,7 +35,7 @@ public class Jugador extends Entidad {
         boolean puedeMoverse=true;
         Habitacion h = mapa.getHabitacion(habitacionActual);
         Celda celda=h.getCeldas()[yDestino][xDestino];
-        if (h.hayEnemigo(xDestino,yDestino)==false) {
+        if (h.sinEnemigo(xDestino,yDestino)==false) {
             puedeMoverse=false;
         }
         if (puedeEntrar(celda)==false) {
@@ -115,9 +116,24 @@ public class Jugador extends Entidad {
     public void interactuar(Mapa mapa){
         int tx=x+dirX;
         int ty=y+dirY;
-        Interactuable i= mapa.getInteractuable(habitacionActual,tx,ty);
-        if(i!=null){
-            i.interactuar(this);
+        Habitacion h=mapa.getHabitacion(habitacionActual);
+        if(h.sinEnemigo(tx,ty)==false){
+            Enemigo enemigo=h.getEnemigo(tx,ty);
+            if(enemigo!=null){
+                atacar(enemigo);
+                System.out.println("Vida enemigo: "+enemigo.getVida()+"/"+enemigo.getVidaMax());
+                if(enemigo.estaVivo()==false){
+                    h.eliminarEnemigo(enemigo);
+                    System.out.println("Enemigo derrotado");
+                }
+            }
+        }
+        else{
+            Interactuable i=mapa.getInteractuable(habitacionActual,tx,ty);
+
+            if(i!=null){
+                i.interactuar(this);
+            }
         }
     }
 
