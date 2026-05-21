@@ -1,6 +1,6 @@
 package Pruebas.Interactuable;
 
-import Pruebas.Personajes.Jugador;
+import Pruebas.Personajes.Jugador.Jugador;
 
 public abstract class Interactuable {
     protected int x;

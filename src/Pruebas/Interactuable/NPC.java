@@ -2,7 +2,7 @@ package Pruebas.Interactuable;
 
 import Estructuras.IndexedList;
 import Pruebas.Interactuable.Acciones.AccionNPC;
-import Pruebas.Personajes.Jugador;
+import Pruebas.Personajes.Jugador.Jugador;
 
 public class NPC extends Interactuable {
 

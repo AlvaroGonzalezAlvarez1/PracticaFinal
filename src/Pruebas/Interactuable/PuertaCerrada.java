@@ -1,7 +1,7 @@
 package Pruebas.Interactuable;
 
 import Pruebas.Objetos.TipoObjeto;
-import Pruebas.Personajes.Jugador;
+import Pruebas.Personajes.Jugador.Jugador;
 
 public class PuertaCerrada extends Interactuable{
     private String orientacion;//0,180,izquierda,derecha

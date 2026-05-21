@@ -7,13 +7,14 @@ import Pruebas.Mapa.Celda.Celda;
 import Pruebas.Mapa.Celda.Tipo;
 import Pruebas.Mapa.Habitacion.Habitacion;
 import Pruebas.Mapa.Puerta.Puerta;
-import Pruebas.Personajes.Jugador;
+import Pruebas.Personajes.Enemigo.Enemigo;
+import Pruebas.Personajes.Jugador.Jugador;
 
 public class Mapa {
     private Graph<Integer,Integer> grafo;
-    private IndexedList<Habitacion> habitaciones;  //Cambiar a indexedList para no modificar cada vez que añado una habitación
+    private IndexedList<Habitacion> habitaciones;
     private IndexedList<Puerta> puertas;
-    private IndexedList<Interactuable> interactuables;
+    private IndexedList<Interactuable> interactuables;  //Al cambiar mapa por eso van aqui, no en habitacion, si solo van a ser cofres si mover a habitación
 
     public Mapa(){
         habitaciones= MapaLoader.cargarHabitaciones();
@@ -26,6 +27,8 @@ public class Mapa {
         for(int i=0;i<puertas.len(); i++) {
             Puerta p=puertas.get(i);
             grafo.addEdge(p.getHabitacionOrigen(), p.getHabitacionDestino(), null);
+            habitaciones.get(3).addEnemigo(new Enemigo(3,3,2,20,20,4,1,"enemigo",-6,-12)
+            );
         }
     }
 

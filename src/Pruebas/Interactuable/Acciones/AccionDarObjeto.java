@@ -2,7 +2,7 @@ package Pruebas.Interactuable.Acciones;
 
 import Pruebas.Interactuable.NPC;
 import Pruebas.Objetos.Objeto;
-import Pruebas.Personajes.Jugador;
+import Pruebas.Personajes.Jugador.Jugador;
 
 public class AccionDarObjeto implements AccionNPC {
 

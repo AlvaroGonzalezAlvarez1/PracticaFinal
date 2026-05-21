@@ -1,7 +1,7 @@
 package Pruebas.Interactuable.Acciones;
 
 import Pruebas.Interactuable.NPC;
-import Pruebas.Personajes.Jugador;
+import Pruebas.Personajes.Jugador.Jugador;
 
 public interface AccionNPC {
     void ejecutar(Jugador jugador,NPC npc);

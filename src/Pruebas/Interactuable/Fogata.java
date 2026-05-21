@@ -1,7 +1,7 @@
 package Pruebas.Interactuable;
 
 import Pruebas.Objetos.TipoObjeto;
-import Pruebas.Personajes.Jugador;
+import Pruebas.Personajes.Jugador.Jugador;
 
 public class Fogata extends Interactuable{
     private boolean encendido;

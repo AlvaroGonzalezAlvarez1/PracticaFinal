@@ -1,7 +1,7 @@
 package Pruebas.Interactuable;
 
 import Pruebas.Objetos.Objeto;
-import Pruebas.Personajes.Jugador;
+import Pruebas.Personajes.Jugador.Jugador;
 
 public class Cofre extends Interactuable{
     private boolean abierto;

@@ -1,7 +1,7 @@
 package Pruebas.Interactuable.Acciones;
 
 import Pruebas.Interactuable.NPC;
-import Pruebas.Personajes.Jugador;
+import Pruebas.Personajes.Jugador.Jugador;
 
 
 //Implementado de otra manera, no se quita por si se usa en un futuro

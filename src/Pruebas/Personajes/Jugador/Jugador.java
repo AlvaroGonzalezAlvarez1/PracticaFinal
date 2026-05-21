@@ -1,4 +1,4 @@
-package Pruebas.Personajes;
+package Pruebas.Personajes.Jugador;
 
 import Estructuras.IndexedList;
 import Pruebas.Interactuable.Interactuable;
@@ -9,18 +9,12 @@ import Pruebas.Mapa.Habitacion.Habitacion;
 import Pruebas.Mapa.Puerta.Puerta;
 import Pruebas.Objetos.Objeto;
 import Pruebas.Objetos.TipoObjeto;
+import Pruebas.Personajes.Entidad;
+import Pruebas.Personajes.Estado;
 
-public class Jugador {
+public class Jugador extends Entidad {
 
-    private int x;
-    private int y;
     private int rango;
-    private int habitacionActual;
-    //Para saber a donde mira el jugador, de momento para poder
-    //abrir cofres, cuando metamos movimiento por raton
-    //lo usaremos para las animaciones
-    private int dirX;
-    private int dirY;
     private Estado estado;
 
     private IndexedList<Objeto> inventario;
@@ -28,56 +22,33 @@ public class Jugador {
     private IndexedList<String> eventos;
 
     public Jugador(int x,int y,int habitacionInicial) {
-        this.x=x;
-        this.y=y;
+        super(x,y,10,10,2,0,habitacionInicial);
         rango=5;
-        this.habitacionActual=habitacionInicial;
-        dirX=0;
-        dirY=1;
         inventario=new IndexedList<>();
         estado=Estado.NORMAL;
         eventos=new IndexedList<>();
     }
 
-    public void mover(int dx, int dy, Mapa mapa) {  //Se mantiene par
-        Habitacion h=mapa.getHabitacion(habitacionActual);
-        dirX=dx;
-        dirY=dy;
-        int nx=x+dx;
-        int ny=y+dy;
-        Celda celda=h.getCeldas()[ny][nx];
-        if(puedeEntrar(celda)==true) {
-            x=nx;
-            y=ny;
-            actualizarEstado(mapa);
-            if (celda.getTipo()== Tipo.PUERTA) {
-                Puerta p=mapa.getPuerta(habitacionActual,nx,ny);
-                if (p!=null){
-                    habitacionActual=p.getHabitacionDestino();
-                    x=p.getXDestino();
-                    y=p.getYDestino();
-                    actualizarEstado(mapa);//Por si se cae a un pozo
-                }
-            }
-        }
-    }
-
+    @Override
     public void moverA(int xDestino, int yDestino, Mapa mapa){
-        Habitacion h=mapa.getHabitacion(habitacionActual);
+        boolean puedeMoverse=true;
+        Habitacion h = mapa.getHabitacion(habitacionActual);
         Celda celda=h.getCeldas()[yDestino][xDestino];
-        if(puedeEntrar(celda)==true){
+        if (h.hayEnemigo(xDestino,yDestino)==false) {
+            puedeMoverse=false;
+        }
+        if (puedeEntrar(celda)==false) {
+            puedeMoverse=false;
+        }
+        if (puedeMoverse==true) {
             dirX=xDestino-x;
             dirY=yDestino-y;
             x=xDestino;
             y=yDestino;
             actualizarEstado(mapa);
-            if(celda.getTipo()==Tipo.PUERTA){
-                Puerta p=mapa.getPuerta(
-                        habitacionActual,
-                        xDestino,
-                        yDestino
-                );
-                if(p!=null){
+            if (celda.getTipo()==Tipo.PUERTA) {
+                Puerta p=mapa.getPuerta(habitacionActual,xDestino,yDestino);
+                if (p!=null) {
                     habitacionActual=p.getHabitacionDestino();
                     x=p.getXDestino();
                     y=p.getYDestino();
@@ -87,23 +58,13 @@ public class Jugador {
         }
     }
 
-    public void mirarHacia(int objetivoX, int objetivoY){
-        dirX=objetivoX-x;
-        dirY=objetivoY-y;
-        if(dirX!=0){
-            dirX=dirX/Math.abs(dirX);
-        }
-        if(dirY!=0){
-            dirY=dirY/Math.abs(dirY);
-        }
-    }
-
     public boolean estaAlLado(int tx,int ty){
         int dx=Math.abs(tx-x);
         int dy=Math.abs(ty-y);
         return dx+dy==1;
     }
 
+    @Override
     public boolean puedeEntrar(Celda celda){
         boolean resultado=false;
         Tipo tipo=celda.getTipo();
@@ -173,7 +134,6 @@ public class Jugador {
     public IndexedList<String> getEventos() {
         return eventos;
     }
-
     //Para dialogos dinamicos, abrir puertas, derrotar enemigos etc
     public void activarEvento(String evento) {
         if(eventos.contains(evento)==false) {
@@ -193,18 +153,6 @@ public class Jugador {
             resultado="file:./src/sprites/jugador_agua.png";
         }
         return resultado;
-    }
-
-    public int getHabitacionActual() {
-        return habitacionActual;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     public int getRango() {

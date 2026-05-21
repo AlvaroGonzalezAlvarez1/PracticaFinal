@@ -2,12 +2,12 @@ import Estructuras.IndexedList;
 import Pruebas.Interactuable.Interactuable;
 import Pruebas.Mapa.Celda.Celda;
 import Pruebas.Mapa.Mapa;
+import Pruebas.Personajes.Enemigo.Enemigo;
 import Pruebas.Personajes.Estado;
-import Pruebas.Personajes.Jugador;
+import Pruebas.Personajes.Jugador.Jugador;
 import Pruebas.Personajes.Posicion;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
@@ -28,6 +28,7 @@ public class JuegoFX extends Application{
     private Pane capaFondo;
     private Pane capaPuentes;
     private Pane capaInteractuables;
+    private Pane capaEnemigos;
     private Pane capaRango;
     private Pane capaJugador;
     private Pane capaUI;
@@ -45,6 +46,7 @@ public class JuegoFX extends Application{
     private ImageView fondoView;
     private IndexedList<ImageView> areaView;
     private IndexedList<ImageView> interactuablesView;
+    private IndexedList<ImageView> enemigosView;
     private IndexedList<ImageView> puentesView;
 
     //CONFIG
@@ -75,10 +77,11 @@ public class JuegoFX extends Application{
         capaFondo=new Pane();
         capaPuentes=new Pane();
         capaInteractuables=new Pane();
+        capaEnemigos=new Pane();
         capaRango=new Pane();
         capaJugador=new Pane();
         capaUI=new Pane();
-        capaJuego.getChildren().addAll(capaFondo,capaPuentes,capaInteractuables,capaRango,capaJugador);
+        capaJuego.getChildren().addAll(capaFondo,capaPuentes,capaInteractuables,capaEnemigos,capaRango,capaJugador);
         scene=new Scene(root,800,600);
         fondoView=new ImageView();
         capaFondo.getChildren().add(fondoView);
@@ -173,6 +176,27 @@ public class JuegoFX extends Application{
         }
     }
 
+    private void renderEnemigos() {
+        if (enemigosView!=null) {
+            for (int i=0;i<enemigosView.len();i++) {
+                capaEnemigos.getChildren().remove(enemigosView.get(i));
+            }
+        }
+        enemigosView=new IndexedList<>();
+        int habitacion=jugador.getHabitacionActual();
+        IndexedList<Enemigo>lista=mapa.getHabitacion(habitacion).getEnemigos();
+        for (int i=0;i<lista.len();i++) {
+            Enemigo e=lista.get(i);
+            if (e.estaVivo()) {
+                ImageView view=new ImageView(new Image(e.getSprite()));
+                view.setX(e.getX()*TILE+e.getOffsetX());
+                view.setY(e.getY()*TILE+e.getOffsetY());
+                enemigosView.append(view);
+                capaEnemigos.getChildren().add(view);
+            }
+        }
+    }
+
     private void configurarControles() {
         scene.setOnMouseClicked(e -> {
             double mouseX=e.getSceneX()-capaJuego.getLayoutX();
@@ -218,6 +242,7 @@ public class JuegoFX extends Application{
         pintarAreaMovimiento();
         renderJugador();
         renderInteractuables();
+        renderEnemigos();
         renderPuentes();
     }
 

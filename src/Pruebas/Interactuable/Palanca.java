@@ -1,7 +1,7 @@
 package Pruebas.Interactuable;
 
 import Estructuras.IndexedList;
-import Pruebas.Personajes.Jugador;
+import Pruebas.Personajes.Jugador.Jugador;
 
 public class Palanca extends Interactuable {
     private IndexedList<Integer> posiciones;

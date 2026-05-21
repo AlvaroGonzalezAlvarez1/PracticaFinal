@@ -1,5 +1,10 @@
 package Pruebas.Personajes;
 
+import Pruebas.Mapa.Celda.Celda;
+import Pruebas.Mapa.Mapa;
+
+import java.util.Random;
+
 public class Posicion {
     private int x;
     private int y;
