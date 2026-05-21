@@ -18,6 +18,7 @@ public class JuegoFX extends Application{
     private Mapa mapa;
     private Jugador jugador;
     private int habitacionActualRender = -1;
+    private IndexedList<Posicion> areaMovimientoActual;
 
     //JAVA FX
     private Pane root;
@@ -173,19 +174,21 @@ public class JuegoFX extends Application{
     }
 
     private void configurarControles() {
-        scene.setOnKeyPressed(e -> {
-            KeyCode code=e.getCode();
-            switch(code){
-                case W ->jugador.mover(0,-1,mapa);
-                case S ->jugador.mover(0,1,mapa);
-                case A ->jugador.mover(-1,0,mapa);
-                case D ->jugador.mover(1,0,mapa);
-                case Q -> jugador.imprimirEventos();
-                case E -> {
-                    jugador.interactuar(mapa);
-                    mapa.aplicarEventos(jugador);
-                    renderInteractuables();
-                }
+        scene.setOnMouseClicked(e -> {
+            double mouseX=e.getSceneX()-capaJuego.getLayoutX();
+            double mouseY=e.getSceneY()-capaJuego.getLayoutY();
+            int tileX=(int)(mouseX/TILE);
+            int tileY=(int)(mouseY/TILE);
+            Interactuable inter=mapa.getInteractuable(jugador.getHabitacionActual(),tileX,tileY);
+            boolean haInteractuado=false;
+            if(inter!=null && jugador.estaAlLado(tileX,tileY)){
+                jugador.mirarHacia(tileX,tileY);
+                jugador.interactuar(mapa);
+                mapa.aplicarEventos(jugador);
+                haInteractuado=true;
+            }
+            if(celdaEnRango(tileX,tileY)){
+                jugador.moverA(tileX,tileY,mapa);
             }
             actualizarVista();
         });
@@ -229,15 +232,26 @@ public class JuegoFX extends Application{
         }
         areaView=new IndexedList<>();
         capaRango.getChildren().clear();
-        IndexedList<Posicion> area=mapa.getHabitacion(jugador.getHabitacionActual()).getAreaMovimiento(jugador,jugador.getX(),jugador.getY(),jugador.getRango());
-        for(int i=0;i<area.len();i++){
-            Posicion p=area.get(i);
+        areaMovimientoActual=mapa.getHabitacion(jugador.getHabitacionActual()).getAreaMovimiento(jugador,jugador.getX(),jugador.getY(),jugador.getRango());
+        for(int i=0;i<areaMovimientoActual.len();i++){
+            Posicion p=areaMovimientoActual.get(i);
             ImageView tile=new ImageView(tileRangoIm);
             tile.setX(p.getX()*TILE);
             tile.setY(p.getY()*TILE);
             areaView.append(tile);
             capaRango.getChildren().add(tile);
         }
+    }
+
+    private boolean celdaEnRango(int x, int y){
+        boolean resultado=false;
+        for(int i=0;i<areaMovimientoActual.len();i++){
+            Posicion p=areaMovimientoActual.get(i);
+            if(p.getX()==x && p.getY()==y){
+                resultado=true;
+            }
+        }
+        return resultado;
     }
 
     private void centrarMapa(int anchoTiles, int altoTiles) {

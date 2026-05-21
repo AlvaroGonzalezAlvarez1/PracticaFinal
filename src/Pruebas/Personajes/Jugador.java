@@ -39,7 +39,7 @@ public class Jugador {
         eventos=new IndexedList<>();
     }
 
-    public void mover(int dx, int dy, Mapa mapa) {
+    public void mover(int dx, int dy, Mapa mapa) {  //Se mantiene par
         Habitacion h=mapa.getHabitacion(habitacionActual);
         dirX=dx;
         dirY=dy;
@@ -62,7 +62,49 @@ public class Jugador {
         }
     }
 
-    public boolean puedeEntrar(Celda celda) {
+    public void moverA(int xDestino, int yDestino, Mapa mapa){
+        Habitacion h=mapa.getHabitacion(habitacionActual);
+        Celda celda=h.getCeldas()[yDestino][xDestino];
+        if(puedeEntrar(celda)==true){
+            dirX=xDestino-x;
+            dirY=yDestino-y;
+            x=xDestino;
+            y=yDestino;
+            actualizarEstado(mapa);
+            if(celda.getTipo()==Tipo.PUERTA){
+                Puerta p=mapa.getPuerta(
+                        habitacionActual,
+                        xDestino,
+                        yDestino
+                );
+                if(p!=null){
+                    habitacionActual=p.getHabitacionDestino();
+                    x=p.getXDestino();
+                    y=p.getYDestino();
+                    actualizarEstado(mapa);
+                }
+            }
+        }
+    }
+
+    public void mirarHacia(int objetivoX, int objetivoY){
+        dirX=objetivoX-x;
+        dirY=objetivoY-y;
+        if(dirX!=0){
+            dirX=dirX/Math.abs(dirX);
+        }
+        if(dirY!=0){
+            dirY=dirY/Math.abs(dirY);
+        }
+    }
+
+    public boolean estaAlLado(int tx,int ty){
+        int dx=Math.abs(tx-x);
+        int dy=Math.abs(ty-y);
+        return dx+dy==1;
+    }
+
+    public boolean puedeEntrar(Celda celda){
         boolean resultado=false;
         Tipo tipo=celda.getTipo();
         if (tipo==Tipo.SUELO || tipo==Tipo.PUERTA) {
