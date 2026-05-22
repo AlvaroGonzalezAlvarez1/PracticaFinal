@@ -145,7 +145,6 @@ public class Jugador extends Entidad {
                 System.out.println("Vida enemigo: "+enemigo.getVida()+"/"+enemigo.getVidaMax());
                 if(enemigo.estaVivo()==false){
                     activarEvento("enemigo_derrotado_"+enemigo.getHabitacionActual()+"_"+enemigo.getX()+"_"+enemigo.getY());
-                    h.eliminarEnemigo(enemigo);
                     System.out.println("Enemigo derrotado");
                 }
             }
