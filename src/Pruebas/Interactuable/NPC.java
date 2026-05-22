@@ -54,7 +54,7 @@ public class NPC extends Interactuable {
     }
 
     @Override
-    public String getSprite() {
+    public String getSprite(Jugador jugador) {
         return "file:./src/sprites/"+sprite+".png";
     }
 

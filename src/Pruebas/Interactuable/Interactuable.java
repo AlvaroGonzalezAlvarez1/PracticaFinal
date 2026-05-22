@@ -15,7 +15,7 @@ public abstract class Interactuable {
 
     public abstract void interactuar(Jugador jugador);
 
-    public abstract String getSprite();
+    public abstract String getSprite(Jugador jugador);
 
     public int getX(){
         return x;
@@ -37,7 +37,7 @@ public abstract class Interactuable {
         return 0;
     }
 
-    public boolean esVisible(){
+    public boolean esVisible(Jugador jugador){
         return true;
     }
 }

@@ -1,3 +1,4 @@
+import DATOS.GuardadoLoader;
 import Estructuras.IndexedList;
 import Pruebas.Interactuable.Interactuable;
 import Pruebas.Mapa.Celda.Celda;
@@ -51,11 +52,16 @@ public class JuegoFX extends Application{
 
     //CONFIG
     private final int TILE = 16;
+    private int slotActivo = 0;
 
 
     @Override
     public void start(Stage stage) {
         inicializarModelo();            // Inicializa el modelo (datos del juego)
+        if(slotActivo!=0){
+            GuardadoLoader.cargarPartida(jugador,slotActivo);
+            mapa.aplicarEventos(jugador);
+        }
         inicializarInterfaz(stage);     // Inicializa la interfaz gráfica
         cargarSprites();                // Carga las imágenes/sprites
         crearJugador();                 // Crea y añade el jugador a la escena
@@ -126,8 +132,8 @@ public class JuegoFX extends Application{
         //Recorrer interactuables del mapa
         for(int i=0; i<mapa.getInteractuables().len();i++) {
             Interactuable inter=mapa.getInteractuables().get(i);
-            if(inter.getHabitacion()==habitacion && inter.esVisible()) {
-                ImageView view=new ImageView(new Image(inter.getSprite()));
+            if(inter.getHabitacion()==habitacion && inter.esVisible(jugador)) {
+                ImageView view=new ImageView(new Image(inter.getSprite(jugador)));
                 view.setX(inter.getX()*TILE+inter.getOffsetX());
                 view.setY(inter.getY()*TILE+inter.getOffsetY());
                 interactuablesView.append(view);
@@ -213,6 +219,14 @@ public class JuegoFX extends Application{
             }
             actualizarVista();
         });
+        scene.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case G -> {
+                    GuardadoLoader.guardarPartida(jugador, slotActivo);
+                    System.out.println("Partida guardada en slot " + slotActivo);
+                }
+            }
+        });
     }
 
     private void actualizarEstadoJuego() {
@@ -281,6 +295,10 @@ public class JuegoFX extends Application{
         double altoMapa=altoTiles*TILE;
         capaJuego.setLayoutX((scene.getWidth()-anchoMapa)/2);
         capaJuego.setLayoutY((scene.getHeight()-altoMapa)/2);
+    }
+
+    public void iniciarDesdeSlot(int slot){
+        slotActivo = slot;
     }
 
     public static void main(String[] args) {

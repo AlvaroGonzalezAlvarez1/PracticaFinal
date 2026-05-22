@@ -5,12 +5,10 @@ import Pruebas.Personajes.Jugador.Jugador;
 
 public class PuertaCerrada extends Interactuable{
     private String orientacion;//0,180,izquierda,derecha
-    private boolean cerrada;
 
     public PuertaCerrada(int habitacion,int x,int y,String orientacion){
         super(habitacion,x,y);
         this.orientacion=orientacion;
-        cerrada=true;
     }
 
     @Override
@@ -19,12 +17,11 @@ public class PuertaCerrada extends Interactuable{
         if(jugador.tieneObjeto(TipoObjeto.LLAVE) && jugador.tieneEvento(evento)==false){
             jugador.eliminarObjeto(TipoObjeto.LLAVE);
             jugador.activarEvento(evento);
-            cerrada=false;
         }
     }
 
     @Override
-    public String getSprite() {
+    public String getSprite(Jugador jugador) {
         return "file:./src/sprites/puerta_cerrada_"+orientacion+".png";
     }
 
@@ -46,9 +43,13 @@ public class PuertaCerrada extends Interactuable{
         return resultado;
     }
 
-    @Override
-    public boolean esVisible() {
-        return cerrada;
+    public boolean esVisible(Jugador jugador) {
+        boolean resultado=true;
+        String evento="puerta_abierta_"+getHabitacion()+"_"+getX()+"_"+getY();
+        if(jugador.tieneEvento(evento)==true){
+            resultado=false;
+        }
+        return resultado;
     }
 }
 

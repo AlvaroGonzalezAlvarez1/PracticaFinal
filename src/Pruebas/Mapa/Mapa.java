@@ -92,6 +92,17 @@ public class Mapa {
                     celdas[y][x].setTipo(Tipo.SUELO);
                 }
             }
+            else if(evento.startsWith("enemigo_derrotado_")){
+                String[] partes=evento.split("_");
+                int habitacion=Integer.parseInt(partes[2]);
+                int x=Integer.parseInt(partes[3]);
+                int y=Integer.parseInt(partes[4]);
+                Habitacion hab=habitaciones.get(habitacion);
+                Enemigo enemigo=hab.getEnemigo(x,y);
+                if(enemigo!=null){
+                    enemigo.morir();
+                }
+            }
         }
     }
 

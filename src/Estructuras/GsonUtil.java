@@ -1,9 +1,6 @@
 package Estructuras;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 
 public class GsonUtil {
@@ -70,5 +67,10 @@ public class GsonUtil {
     public static boolean eliminarFichero(String rutaArchivo) {
         java.io.File file=new java.io.File(rutaArchivo);
         return file.delete();
+    }
+
+    public static boolean existeArchivo(String rutaArchivo) {
+        File file=new java.io.File(rutaArchivo);
+        return file.exists();
     }
 }

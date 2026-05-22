@@ -30,6 +30,18 @@ public class Jugador extends Entidad {
         eventos=new IndexedList<>();
     }
 
+    public void setX(int x){
+        this.x=x;
+    }
+
+    public void setY(int y){
+        this.y=y;
+    }
+
+    public void setHabitacionActual(int habitacion){
+        habitacionActual=habitacion;
+    }
+
     @Override
     public void moverA(int xDestino, int yDestino, Mapa mapa){
         boolean puedeMoverse=true;
@@ -80,6 +92,11 @@ public class Jugador extends Entidad {
         return resultado;
     }
 
+
+    public IndexedList<Objeto> getInventario() {
+        return inventario;
+    }
+
     public void eliminarObjeto(TipoObjeto tipo){    //Cambiar a eliminar Objeto
         boolean eliminado=false;
         int i=0;
@@ -113,6 +130,10 @@ public class Jugador extends Entidad {
         return resultado;
     }
 
+    public void limpiarInventario(){
+        inventario.clear();
+    }
+
     public void interactuar(Mapa mapa){
         int tx=x+dirX;
         int ty=y+dirY;
@@ -123,18 +144,16 @@ public class Jugador extends Entidad {
                 atacar(enemigo);
                 System.out.println("Vida enemigo: "+enemigo.getVida()+"/"+enemigo.getVidaMax());
                 if(enemigo.estaVivo()==false){
-                    h.eliminarEnemigo(enemigo);
+                    activarEvento("enemigo_derrotado_"+enemigo.getHabitacionActual()+"_"+enemigo.getX()+"_"+enemigo.getY());
                     System.out.println("Enemigo derrotado");
                 }
             }
         }
-        else{
-            Interactuable i=mapa.getInteractuable(habitacionActual,tx,ty);
-
-            if(i!=null){
-                i.interactuar(this);
+        Interactuable i=mapa.getInteractuable(habitacionActual,tx,ty);
+        if(i!=null){
+            i.interactuar(this);
             }
-        }
+
     }
 
     public void actualizarEstado(Mapa mapa) {
@@ -159,6 +178,10 @@ public class Jugador extends Entidad {
 
     public boolean tieneEvento(String evento) {
         return eventos.contains(evento);
+    }
+
+    public void limpiarEventos(){
+        eventos.clear();
     }
 
     //Mejora para implementar animaciones

@@ -4,33 +4,27 @@ import Pruebas.Objetos.Objeto;
 import Pruebas.Personajes.Jugador.Jugador;
 
 public class Cofre extends Interactuable{
-    private boolean abierto;
     private Objeto objeto;
 
     public Cofre(int habitacion,int x,int y,Objeto objeto){
         super(habitacion,x,y);
         this.objeto=objeto;
-        abierto=false;
-    }
-
-    public boolean isAbierto() {
-        return abierto;
     }
 
     @Override
     public void interactuar(Jugador jugador){
         String evento="cofre_"+getHabitacion()+"_"+getX()+"_"+getY();
-        if(abierto==false){
-            abierto=true;
+        if(jugador.tieneEvento(evento)==false){
             jugador.activarEvento(evento);
             jugador.anadirObjeto(objeto);
         }
     }
 
     @Override
-    public String getSprite() {
+    public String getSprite(Jugador jugador) {
+        String evento="cofre_"+getHabitacion()+"_"+getX()+"_"+getY();
         String resultado="";
-        if(isAbierto()==true){
+        if(jugador.tieneEvento(evento)==true){
             resultado="file:./src/sprites/cofre_abierto.png";
         }
         else{

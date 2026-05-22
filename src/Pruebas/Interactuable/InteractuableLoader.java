@@ -48,7 +48,7 @@ public class InteractuableLoader {
         return result;
     }
 
-    private static TipoObjeto reconocerTipoObjeto(String tipo) {
+    public static TipoObjeto reconocerTipoObjeto(String tipo) {
         TipoObjeto result;
         switch (tipo){
             case "ALETA"->result=TipoObjeto.ALETA;

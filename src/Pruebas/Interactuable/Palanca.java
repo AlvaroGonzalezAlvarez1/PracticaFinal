@@ -5,12 +5,10 @@ import Pruebas.Personajes.Jugador.Jugador;
 
 public class Palanca extends Interactuable {
     private IndexedList<Integer> posiciones;
-    private boolean activada;
 
     public Palanca(int habitacion,int x,int y,IndexedList<Integer> posiciones) {
         super(habitacion,x,y);
         this.posiciones=posiciones;
-        activada=false;
     }
 
     @Override
@@ -18,7 +16,6 @@ public class Palanca extends Interactuable {
         String evento="palanca_activa_"+getHabitacion()+"_"+getX()+"_"+getY()+"_"+getDatosEvento();
         if(jugador.tieneEvento(evento)==false){
             jugador.activarEvento(evento);
-            activada=true;
         }
     }
 
@@ -38,10 +35,15 @@ public class Palanca extends Interactuable {
     }
 
     @Override
-    public String getSprite() {
-        if(activada==true) {
-            return "file:./src/sprites/palanca_activa.png";
+    public String getSprite(Jugador jugador) {
+        String evento="palanca_activa_"+getHabitacion()+"_"+getX()+"_"+getY()+"_"+getDatosEvento();
+        String resultado="";
+        if(jugador.tieneEvento(evento)==true) {
+            resultado="file:./src/sprites/palanca_activa.png";
         }
-        return "file:./src/sprites/palanca_inactiva.png";
+        else{
+            resultado="file:./src/sprites/palanca_inactiva.png";
+        }
+        return resultado;
     }
 }
