@@ -41,12 +41,7 @@ public class Enemigo extends Entidad {
             y=ySpawn;
             habitacionActual=habitacionSpawn;
             vida=vidaMax;
-
         }
-    }
-
-    public void morir(){
-        vida=0;
     }
 
     public int getOffsetX() {

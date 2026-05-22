@@ -94,7 +94,7 @@ public class Habitacion {
         int i=0;
         while(i<enemigos.len() && resultado==null){
             Enemigo e=enemigos.get(i);
-            if(e.getX()==x && e.getY()==y){
+            if(e.getX()==x && e.getY()==y && e.estaVivo()){
                 resultado=e;
             }
             i++;

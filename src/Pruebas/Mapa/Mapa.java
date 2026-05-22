@@ -100,7 +100,7 @@ public class Mapa {
                 Habitacion hab=habitaciones.get(habitacion);
                 Enemigo enemigo=hab.getEnemigo(x,y);
                 if(enemigo!=null){
-                    enemigo.morir();
+                    hab.eliminarEnemigo(enemigo);
                 }
             }
         }
